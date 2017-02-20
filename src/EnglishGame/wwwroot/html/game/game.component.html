@@ -1,0 +1,21 @@
+﻿<md-toolbar color="primary">
+    <span>GameViewer</span>
+    <span class="spacer"></span>
+    <button md-icon-button [mdMenuTriggerFor]="menu">
+        <md-icon>more_vert</md-icon>
+    </button>
+    <md-menu #menu="mdMenu">
+        <button md-menu-item>
+            <md-icon>fingerprint</md-icon>
+            <span>Login</span>
+        </button>
+        <button md-menu-item disabled>
+            <md-icon>announcement</md-icon>
+            <span>Issues</span>
+        </button>
+        <button md-menu-item>
+            <md-icon>notifications_off</md-icon>
+            <span>Disable alerts</span>
+        </button>
+    </md-menu>
+</md-toolbar>

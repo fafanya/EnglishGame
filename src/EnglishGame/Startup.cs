@@ -46,9 +46,12 @@ namespace EnglishGame
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseApplicationInsightsRequestTelemetry();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
-            app.UseApplicationInsightsExceptionTelemetry();
+            //app.UseApplicationInsightsRequestTelemetry();
+            //app.UseApplicationInsightsExceptionTelemetry();
+            //app.UseJwtBearerAuthentication();
 
             app.UseMvc();
         }

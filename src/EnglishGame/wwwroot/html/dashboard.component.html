@@ -1,0 +1,8 @@
+﻿<h3>Top Issues</h3>
+<div class="grid grid-pad">
+    <a *ngFor="let issue of issues" [routerLink]="['/detail', issue.id]" class="col-1-4">
+        <div class="module issue">
+            <h4>{{issue.name}}</h4>
+        </div>
+    </a>
+</div>
