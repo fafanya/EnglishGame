@@ -1,5 +1,4 @@
 ﻿/// <autosync enabled="true" />
-/// <reference path="app/issue.service.js" />
 /// <reference path="js/systemjs.config.js" />
 /// <reference path="lib/bootstrap/dist/js/bootstrap.js" />
 /// <reference path="lib/jquery/dist/jquery.js" />
