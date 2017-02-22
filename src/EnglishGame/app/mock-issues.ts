@@ -2,7 +2,7 @@ import { Issue } from './issue';
 
 export const ISSUES: Issue[] = [
     { id: 11, name: 'Accident' },
-    { id: 12, name: 'Yawner10' },
+    { id: 12, name: 'Yawner1012' },
     { id: 13, name: 'Crash' },
     { id: 14, name: 'Leakage' },
     { id: 15, name: 'Rat' },
