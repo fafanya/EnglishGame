@@ -38,7 +38,7 @@ import { AppRoutingModule }     from './app-routing.module';
         HomeComponent,
         LoginComponent
     ],
-    providers: [IssueService],
+    providers: [IssueService, AuthService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

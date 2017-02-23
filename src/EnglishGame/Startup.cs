@@ -130,6 +130,17 @@ namespace EnglishGame
             })
             .UseDefaultFiles()
             .UseStaticFiles();
+
+            #region route
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}");
+
+                routes.MapSpaFallbackRoute("spa-fallback", new { controller = "Home", action = "Index" });
+            });
+            #endregion
         }
     }
 }
