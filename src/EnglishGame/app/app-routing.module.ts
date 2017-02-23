@@ -6,6 +6,9 @@ import { DashboardComponent } from './dashboard.component';
 import { GameComponent } from './game/game.component';
 import { AccountComponent } from './game/account.component';
 
+import { HomeComponent } from './game/login/home/home.component';
+import { LoginComponent } from './game/login/login/login.component';
+
 const routes: Routes = [
     {
         path: '',
@@ -31,6 +34,14 @@ const routes: Routes = [
     {
         path: 'account',
         component: AccountComponent
+    },
+    {
+        path: "home",
+        component: HomeComponent
+    },
+    {
+        path: "login",
+        component: LoginComponent
     }
 ];
 

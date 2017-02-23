@@ -10,6 +10,11 @@ import { DashboardComponent } from './dashboard.component';
 import { IssueService } from  './issue.service';
 import { GameComponent } from './game/game.component';
 import { AccountComponent } from './game/account.component';
+
+import { AuthService } from './game/login/_services/auth.service';
+import { HomeComponent } from './game/login/home/home.component';
+import { LoginComponent } from './game/login/login/login.component';
+
 import 'hammerjs';
 
 import { AppRoutingModule }     from './app-routing.module';
@@ -29,7 +34,9 @@ import { AppRoutingModule }     from './app-routing.module';
         IssuesComponent,
         DashboardComponent,
         GameComponent,
-        AccountComponent
+        AccountComponent,
+        HomeComponent,
+        LoginComponent
     ],
     providers: [IssueService],
     bootstrap: [AppComponent]
