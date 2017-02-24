@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 using System.Security.Claims;
 using System.Security.Principal;
 using Microsoft.IdentityModel.Tokens;
-using EnglishGame.Model;
+using EnglishGame.Models;
 using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -20,9 +20,9 @@ namespace EnglishGame.Controllers
     public class TokenAuthController : Controller
     {
         [HttpPost]
-        public string GetAuthToken([FromBody]User user)
+        public string GetAuthToken([FromBody]UUser user)
         {
-            var existUser = UserStorage.Users.FirstOrDefault(u => u.Username == user.Username && u.Password == user.Password);
+            var existUser = UserStorage.Users.FirstOrDefault(u => u.UserName == user.UserName && u.Password == user.Password);
 
             if (existUser != null)
             {
@@ -52,14 +52,14 @@ namespace EnglishGame.Controllers
             }
         }
 
-        private string GenerateToken(User user, DateTime expires)
+        private string GenerateToken(UUser user, DateTime expires)
         {
             var handler = new JwtSecurityTokenHandler();
 
             ClaimsIdentity identity = new ClaimsIdentity(
-                new GenericIdentity(user.Username, "TokenAuth"),
+                new GenericIdentity(user.UserName, "TokenAuth"),
                 new[] {
-                    new Claim("ID", user.ID.ToString())
+                    new Claim("ID", user.Id)
                 }
             );
 
@@ -91,21 +91,14 @@ namespace EnglishGame.Controllers
         }
     }
 
-    public class User
-    {
-        public Guid ID { get; set; }
-
-        public string Username { get; set; }
-
-        public string Password { get; set; }
-    }
+    
 
     public static class UserStorage
     {
-        public static List<User> Users { get; set; } = new List<User> {
-            new User {ID=Guid.NewGuid(),Username="user1",Password = "user1psd" },
-            new User {ID=Guid.NewGuid(),Username="user2",Password = "user2psd" },
-            new User {ID=Guid.NewGuid(),Username="user3",Password = "user3psd" }
+        public static List<UUser> Users { get; set; } = new List<UUser> {
+            new UUser {Id="1",UserName="user1",Password = "user1psd" },
+            new UUser {Id="2",UserName="user2",Password = "user2psd" },
+            new UUser {Id="3",UserName="user3",Password = "user3psd" }
         };
     }
 }

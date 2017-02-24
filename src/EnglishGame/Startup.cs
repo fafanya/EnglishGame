@@ -16,7 +16,11 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using EnglishGame.Auth;
-using EnglishGame.Model;
+using EnglishGame.Models;
+using Microsoft.EntityFrameworkCore;
+using EnglishGame.Data;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using EnglishGame.Controllers;
 
 namespace EnglishGame
 {
@@ -53,6 +57,22 @@ namespace EnglishGame
                     .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme‌​)
                     .RequireAuthenticatedUser().Build());
             });
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<UUser, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 1;
+                options.User.AllowedUserNameCharacters = null;
+            }
+            )
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
             services.AddMvc();
         }
@@ -131,6 +151,8 @@ namespace EnglishGame
             .UseDefaultFiles()
             .UseStaticFiles()
             .UseMvc();
+
+            ApplicationDbContext.Initialize(app.ApplicationServices);
         }
     }
 }
