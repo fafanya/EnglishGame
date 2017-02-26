@@ -20,12 +20,19 @@ using EnglishGame.Models;
 using Microsoft.EntityFrameworkCore;
 using EnglishGame.Data;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using EnglishGame.Controllers;
+
+using EnglishGame.Data.Repositories;
+using EnglishGame.Data.Abstract;
+using EnglishGame.Core.Mappings;
+using Newtonsoft.Json.Serialization;
+using RecurrentTasks;
+using EnglishGame.Core;
 
 namespace EnglishGame
 {
     public class Startup
     {
+        public static string API_URL = string.Empty;
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -41,6 +48,8 @@ namespace EnglishGame
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+
+            API_URL = Configuration["apiURL"];
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -75,6 +84,26 @@ namespace EnglishGame
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+
+
+            //----------------------------
+            services.AddDbContext<LiveGameContext>(options => options.UseInMemoryDatabase());
+            // Repositories
+            services.AddScoped<IMatchRepository, MatchRepository>();
+            services.AddScoped<IFeedRepository, FeedRepository>();
+
+            // Automapper Configuration
+            AutoMapperConfiguration.Configure();
+
+            // Add framework services.
+            services
+                .AddMvc()
+                .AddJsonOptions(options => options.SerializerSettings.ContractResolver =
+                    new DefaultContractResolver());
+
+            services.AddSignalR(options => options.Hubs.EnableDetailedErrors = true);
+
+            services.AddTask<FeedEngine>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
@@ -151,6 +180,23 @@ namespace EnglishGame
             .UseDefaultFiles()
             .UseStaticFiles()
             .UseMvc();
+
+            app.UseCors(
+                builder => builder.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials())
+                .UseStaticFiles()
+                .UseWebSockets();
+
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            app.UseMvc(routes => { });
+            app.UseSignalR();
+
+            LiveGameDbInitializer.Initialize(app.ApplicationServices);
+
+            app.StartTask<FeedEngine>(TimeSpan.FromSeconds(15));
 
             ApplicationDbContext.Initialize(app.ApplicationServices);
         }

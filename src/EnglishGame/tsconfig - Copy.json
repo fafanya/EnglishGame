@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": false,
+    "rootDir": "app",
+    "outDir": "wwwroot/app",
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "types": [
+      "hammerjs"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "wwwroot/node_modules",
+    "typings"
+  ],
+  "compileOnSave": true
+}

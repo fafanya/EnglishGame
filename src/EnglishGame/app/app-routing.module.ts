@@ -9,6 +9,8 @@ import { AccountComponent } from './game/account.component';
 import { HomeComponent } from './game/login/home/home.component';
 import { LoginComponent } from './game/login/login/login.component';
 
+import { RHomeComponent } from './signalr/rhome.component';
+
 const routes: Routes = [
     {
         path: '',
@@ -42,6 +44,10 @@ const routes: Routes = [
     {
         path: "login",
         component: LoginComponent
+    },
+    {
+        path: 'rhome',
+        component: RHomeComponent
     }
 ];
 

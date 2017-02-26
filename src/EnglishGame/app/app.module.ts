@@ -19,6 +19,13 @@ import 'hammerjs';
 
 import { AppRoutingModule }     from './app-routing.module';
 
+import { ConfigService } from './signalr/config.service';
+import { DataService } from './signalr/data.service';
+import { RHomeComponent } from './signalr/rhome.component';
+import { HighlightDirective } from './signalr/highlight.directive';
+import { MatchComponent } from './signalr/match.component';
+import { ChatComponent } from './signalr/chat.component';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -36,9 +43,18 @@ import { AppRoutingModule }     from './app-routing.module';
         GameComponent,
         AccountComponent,
         HomeComponent,
-        LoginComponent
+        LoginComponent,
+        ChatComponent,
+        RHomeComponent,
+        HighlightDirective,
+        MatchComponent
     ],
-    providers: [IssueService, AuthService],
+    providers: [
+        IssueService,
+        AuthService,
+        ConfigService,
+        DataService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
