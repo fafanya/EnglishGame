@@ -28,6 +28,7 @@ bld/
 src/EnglishGame/wwwroot/app/**/*.js
 src/EnglishGame/wwwroot/_references.js
 src/EnglishGame/wwwroot/lib/
+src/EnglishGame/typings/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
