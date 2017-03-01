@@ -1,9 +1,8 @@
 {
   "version": "1.0.0",
-  "description": "english game",
-  "name": "english game",
+  "description": "englishgame",
+  "name": "englishgame",
   "dependencies": {
-    "@types/hammerjs": "^2.0.8",
     "@angular/common": "^2.3.0",
     "@angular/compiler": "^2.3.0",
     "@angular/core": "^2.3.0",
@@ -14,6 +13,7 @@
     "@angular/platform-browser-dynamic": "^2.3.0",
     "@angular/router": "3.4.8",
     "@angular/upgrade": "^2.3.0",
+    "@types/hammerjs": "^2.0.8",
     "bower": "1.7.9",
     "core-js": "^2.4.1",
     "hammerjs": "^2.0.8",
@@ -28,11 +28,11 @@
     "concurrently": "^2.2.0",
     "jasmine-core": "2.4.1",
     "tslint": "^3.15.1",
-    "typescript": "2.2.1",
+    "typescript": "^2.0.0",
     "typings": "^1.3.2"
   },
   "scripts": {
-    "start": "concurrently \"npm run tsc:w\"",
+    "start": "concurrently \"npm run watch\" \"npm run tsc:w\"",
     "postinstall": "typings install",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
