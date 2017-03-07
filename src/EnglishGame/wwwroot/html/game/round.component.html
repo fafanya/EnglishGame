@@ -3,16 +3,24 @@
 
     <md-grid-tile colspan="2" [style.background]="'lightblue'"></md-grid-tile>
     <md-grid-tile [style.background]="'red'">
-        2+2
+        {{question}}
     </md-grid-tile>
     <md-grid-tile colspan="2" [style.background]="'lightblue'"></md-grid-tile>
 
     <md-grid-tile colspan="5" [style.background]="'lightblue'"></md-grid-tile>
 
     <md-grid-tile [style.background]="'lightblue'"></md-grid-tile>
-    <md-grid-tile [style.background]="'red'">4</md-grid-tile>
+    <md-grid-tile [style.background]="'red'">
+        <button md-button (click)="rightChoice()">
+            {{rightVariant}}
+        </button>
+    </md-grid-tile>
     <md-grid-tile [style.background]="'lightblue'"></md-grid-tile>
-    <md-grid-tile [style.background]="'red'">7</md-grid-tile>
+    <md-grid-tile [style.background]="'red'">
+        <button md-button (click)="leftChoice()">
+            {{leftVariant}}
+        </button>
+    </md-grid-tile>
     <md-grid-tile [style.background]="'lightblue'"></md-grid-tile>
 
     <md-grid-tile colspan="5" [style.background]="'lightblue'"></md-grid-tile>
