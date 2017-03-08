@@ -12,6 +12,7 @@ import { IssueService } from './issue.service';
 import { GameComponent } from './game/game.component';
 import { AccountComponent } from './game/account.component';
 import { RoundComponent } from './game/round.component';
+import { GameService } from './game/game.service';
 
 import { AuthService } from './game/login/_services/auth.service';
 import { HomeComponent } from './game/login/home/home.component';
@@ -58,7 +59,8 @@ import { ChatComponent } from './signalr/chat.component';
         IssueService,
         AuthService,
         ConfigService,
-        DataService
+        DataService,
+        GameService
     ],
     bootstrap: [AppComponent]
 })
