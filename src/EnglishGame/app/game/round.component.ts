@@ -1,8 +1,10 @@
 ﻿import { Component, OnInit } from '@angular/core';
+//import { GameService } from './game.service';
 
 @Component({
     selector: 'round',
-    templateUrl: '../html/game/round.component.html'
+    templateUrl: '../html/game/round.component.html',
+    //providers: [GameService]
 })
 export class RoundComponent implements OnInit {
 
