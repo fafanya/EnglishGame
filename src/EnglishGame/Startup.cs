@@ -199,6 +199,22 @@ namespace EnglishGame
             app.StartTask<FeedEngine>(TimeSpan.FromSeconds(15));
 
             ApplicationDbContext.Initialize(app.ApplicationServices);
+
+            if (env.IsDevelopment())
+            {
+                ServeFromDirectory(app, env, "node_modules");
+            }
+        }
+
+        public void ServeFromDirectory(IApplicationBuilder app, IHostingEnvironment env, string path)
+        {
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(env.ContentRootPath, path)
+                ),
+                RequestPath = "/" + path
+            });
         }
     }
 }
