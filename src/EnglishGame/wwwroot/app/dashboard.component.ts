@@ -6,8 +6,8 @@ import { IssueService } from './issue.service';
 @Component({
     moduleId: module.id,
     selector: 'dashboard',
-    templateUrl: '../html/dashboard.component.html',
-    styleUrls: ['../html/dashboard.component.css']
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
     issues: Issue[] = [];

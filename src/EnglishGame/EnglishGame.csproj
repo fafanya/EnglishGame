@@ -19,6 +19,43 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="round.component.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\app\app.component.css">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\app\app.component.html">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\app\dashboard.component.css" />
+    <Content Include="wwwroot\app\dashboard.component.html" />
+    <Content Include="wwwroot\app\game\account.component.html" />
+    <Content Include="wwwroot\app\game\game.component.html" />
+    <Content Include="wwwroot\app\game\login\home\home.component.css" />
+    <Content Include="wwwroot\app\game\login\home\home.component.html" />
+    <Content Include="wwwroot\app\game\login\home\style.css" />
+    <Content Include="wwwroot\app\game\login\home\view.html" />
+    <Content Include="wwwroot\app\game\login\login\login.component.css" />
+    <Content Include="wwwroot\app\game\login\login\login.component.html" />
+    <Content Include="wwwroot\app\game\login\login\style.css" />
+    <Content Include="wwwroot\app\game\login\login\view.html" />
+    <Content Include="wwwroot\app\game\round.component.html" />
+    <Content Include="wwwroot\app\issue-detail.component.css" />
+    <Content Include="wwwroot\app\issue-detail.component.html" />
+    <Content Include="wwwroot\app\issues.component.css">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\app\issues.component.html">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\app\signalr\chat.component.html" />
+    <Content Include="wwwroot\app\signalr\match.component.html" />
+    <Content Include="wwwroot\app\signalr\rhome.component.html" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="wwwroot\**\*;Views;Areas\**\Views">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>

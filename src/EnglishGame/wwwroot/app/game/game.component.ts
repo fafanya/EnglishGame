@@ -1,8 +1,9 @@
 ﻿import { Component, OnInit } from '@angular/core';
 
 @Component({
+    moduleId: module.id,
     selector: 'game',
-    templateUrl: '../html/game/game.component.html'
+    templateUrl: './game.component.html'
 })
 export class GameComponent implements OnInit {
     ngOnInit(): void {

@@ -7,9 +7,10 @@ import { IssueService } from './issue.service';
 import { Issue } from './issue';
 
 @Component({
+    moduleId: module.id,
     selector: 'issue-detail',
-    templateUrl: '../html/issue-detail.component.html',
-    styleUrls: ['../html/issue-detail.component.css']
+    templateUrl: './issue-detail.component.html',
+    styleUrls: ['./issue-detail.component.css']
 })
 export class IssueDetailComponent implements OnInit {
     constructor(

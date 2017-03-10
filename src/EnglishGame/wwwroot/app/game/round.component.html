@@ -2,23 +2,23 @@
     <md-grid-tile colspan="5" [style.background]="'lightblue'"></md-grid-tile>
 
     <md-grid-tile colspan="2" [style.background]="'lightblue'"></md-grid-tile>
-    <md-grid-tile [style.background]="'red'">
-        {{question}}
+    <md-grid-tile [style.background]="'yellow'">
+        {{round.question}}
     </md-grid-tile>
     <md-grid-tile colspan="2" [style.background]="'lightblue'"></md-grid-tile>
 
     <md-grid-tile colspan="5" [style.background]="'lightblue'"></md-grid-tile>
 
     <md-grid-tile [style.background]="'lightblue'"></md-grid-tile>
-    <md-grid-tile [style.background]="'red'">
+    <md-grid-tile [style.background]="'green'">
         <button md-button (click)="rightChoice()">
-            {{rightVariant}}
+            {{round.rightVariant}}
         </button>
     </md-grid-tile>
     <md-grid-tile [style.background]="'lightblue'"></md-grid-tile>
-    <md-grid-tile [style.background]="'red'">
+    <md-grid-tile [style.background]="'green'">
         <button md-button (click)="leftChoice()">
-            {{leftVariant}}
+            {{round.leftVariant}}
         </button>
     </md-grid-tile>
     <md-grid-tile [style.background]="'lightblue'"></md-grid-tile>

@@ -6,8 +6,9 @@ import { DataService } from './data.service';
 import { SignalRConnectionStatus } from './interfaces';
 
 @Component({
+    moduleId: module.id,
     selector: 'rhome',
-    templateUrl: '../../html/signalr/rhome.component.html'
+    templateUrl: './rhome.component.html'
 })
 export class RHomeComponent implements OnInit {
 

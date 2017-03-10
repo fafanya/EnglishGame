@@ -7,8 +7,7 @@
     "experimentalDecorators": true,
     "removeComments": false,
     "noImplicitAny": false,
-    "rootDir": "app",
-    "outDir": "wwwroot/app",
+    "rootDir": "wwwroot/app",
     "inlineSourceMap": true,
     "inlineSources": true,
     "types": [

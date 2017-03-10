@@ -6,8 +6,9 @@ import { DataService } from './data.service';
 
 
 @Component({
+    moduleId: module.id,
     selector: 'match',
-    templateUrl: '../../html/signalr/match.component.html'
+    templateUrl: './match.component.html'
 })
 
 export class MatchComponent implements OnInit {

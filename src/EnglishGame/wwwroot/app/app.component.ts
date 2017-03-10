@@ -4,9 +4,10 @@ import { FeedService } from './signalr/feed.service';
 import { SignalRConnectionStatus } from './signalr/interfaces';
 
 @Component({
+    moduleId: module.id,
     selector: 'my-app',
-    templateUrl: '../html/app.component.html',
-    styleUrls: ['../html/app.component.css'],
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
     providers: [FeedService]
 })
 export class AppComponent {

@@ -4,8 +4,9 @@ import { ChatMessage, Match } from './interfaces';
 import { FeedService } from './feed.service';
 
 @Component({
+    moduleId: module.id,
     selector: 'chat',
-    templateUrl: '../../html/signalr/chat.component.html'
+    templateUrl: './chat.component.html'
 })
 export class ChatComponent implements OnInit {
 

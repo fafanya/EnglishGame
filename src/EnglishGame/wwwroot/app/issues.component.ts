@@ -5,9 +5,10 @@ import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
+    moduleId: module.id,
     selector: 'issues',
-    templateUrl: '../html/issues.component.html',
-    styleUrls: ['../html/issues.component.css'],
+    templateUrl: './issues.component.html',
+    styleUrls: ['./issues.component.css'],
     providers: [IssueService]
 })
 export class IssuesComponent implements OnInit {

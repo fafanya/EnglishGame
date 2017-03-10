@@ -5,8 +5,8 @@ import { AuthService } from "../_services/auth.service";
 @Component({
     moduleId: module.id,
     selector: "my-home",
-    templateUrl: "../../../../html/game/login/home/view.html",
-    styleUrls: ["../../../../html/game/login/home/style.css"]
+    templateUrl: "./home.component.html",
+    styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
     isLogin = false;
