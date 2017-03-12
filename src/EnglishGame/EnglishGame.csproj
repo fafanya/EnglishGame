@@ -41,7 +41,9 @@
     <Content Include="wwwroot\app\game\login\login\login.component.html" />
     <Content Include="wwwroot\app\game\login\login\style.css" />
     <Content Include="wwwroot\app\game\login\login\view.html" />
-    <Content Include="wwwroot\app\game\round.component.html" />
+    <Content Include="wwwroot\app\game\round-detail.component.ts" />
+    <Content Include="wwwroot\app\game\round.component.js" />
+    <Content Include="wwwroot\app\game\round-detail.component.html" />
     <Content Include="wwwroot\app\issue-detail.component.css" />
     <Content Include="wwwroot\app\issue-detail.component.html" />
     <Content Include="wwwroot\app\issues.component.css">
