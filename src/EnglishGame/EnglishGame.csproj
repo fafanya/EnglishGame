@@ -35,15 +35,15 @@
     <Content Include="wwwroot\app\game\game.component.html" />
     <Content Include="wwwroot\app\game\login\home\home.component.css" />
     <Content Include="wwwroot\app\game\login\home\home.component.html" />
-    <Content Include="wwwroot\app\game\login\home\style.css" />
-    <Content Include="wwwroot\app\game\login\home\view.html" />
     <Content Include="wwwroot\app\game\login\login\login.component.css" />
     <Content Include="wwwroot\app\game\login\login\login.component.html" />
-    <Content Include="wwwroot\app\game\login\login\style.css" />
-    <Content Include="wwwroot\app\game\login\login\view.html" />
     <Content Include="wwwroot\app\game\round-detail.component.ts" />
     <Content Include="wwwroot\app\game\round.component.js" />
     <Content Include="wwwroot\app\game\round-detail.component.html" />
+    <Content Include="wwwroot\app\game\signin\signin.component.html" />
+    <Content Include="wwwroot\app\game\signin\signin.component.ts" />
+    <Content Include="wwwroot\app\game\signup\signup.component.html" />
+    <Content Include="wwwroot\app\game\signup\signup.component.ts" />
     <Content Include="wwwroot\app\issue-detail.component.css" />
     <Content Include="wwwroot\app\issue-detail.component.html" />
     <Content Include="wwwroot\app\issues.component.css">
@@ -103,10 +103,6 @@
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\app\game\registration\" />
   </ItemGroup>
 
 </Project>
