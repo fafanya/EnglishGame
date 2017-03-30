@@ -32,10 +32,12 @@ export class RoundDetailComponent implements OnInit {
 
     leftChoice() {
         var b = 2 + 2;
+        this.gameService.postAnswer(b.toString());
     }
 
     rightChoice() {
         var a = 1 + 1;
+        this.gameService.postAnswer(a.toString());
     }
 
     goBack(): void {
