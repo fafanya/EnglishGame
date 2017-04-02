@@ -43,7 +43,7 @@ export class FeedService {
         
         let connection = <FeedSignalR>$.connection;
         // reference signalR hub named 'broadcaster'
-        let feedHub = connection.broadcaster;
+        let feedHub = connection.broadcastert;
         this.server = feedHub.server;
 
         // setConnectionId method called by server

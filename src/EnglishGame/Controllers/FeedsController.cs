@@ -8,7 +8,7 @@ using AutoMapper;
 namespace EnglishGame.Controllers
 {
     [Route("api/[controller]")]
-    public class FeedsController : ApiHubController<Broadcaster>
+    public class FeedsController : ApiHubController<Broadcastert>
     {
         IFeedRepository _feedRepository;
         IMatchRepository _matchRepository;

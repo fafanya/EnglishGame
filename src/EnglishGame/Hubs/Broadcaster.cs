@@ -4,7 +4,7 @@ using EnglishGame.Models;
 
 namespace EnglishGame.Hubs
 {
-    public class Broadcaster : Hub<IBroadcaster>
+    public class Broadcastert : Hub<IBroadcaster>
     {
         public override Task OnConnected()
         {

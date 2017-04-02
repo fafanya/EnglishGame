@@ -6,7 +6,7 @@ using EnglishGame.Models;
 namespace EnglishGame.Controllers
 {
     [Route("api/[controller]")]
-    public class MessagesController : ApiHubController<Broadcaster>
+    public class MessagesController : ApiHubController<Broadcastert>
     {
         public MessagesController(
             IConnectionManager signalRConnectionManager)

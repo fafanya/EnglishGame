@@ -9,7 +9,7 @@ using AutoMapper;
 namespace EnglishGame.Controllers
 {
     [Route("api/[controller]")]
-    public class MatchesController : ApiHubController<Broadcaster>
+    public class MatchesController : ApiHubController<Broadcastert>
     {
         IMatchRepository _matchRepository;
         public MatchesController(
