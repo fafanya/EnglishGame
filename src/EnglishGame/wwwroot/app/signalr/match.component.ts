@@ -1,16 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-
 import { ChatMessage, Match } from './interfaces';
 import { FeedService } from './feed.service';
 import { DataService } from './data.service';
-
 
 @Component({
     moduleId: module.id,
     selector: 'match',
     templateUrl: './match.component.html'
 })
-
 export class MatchComponent implements OnInit {
 
     @Input() match: Match;

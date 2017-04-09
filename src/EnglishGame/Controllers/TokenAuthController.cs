@@ -11,6 +11,11 @@ using System.Security.Principal;
 using Microsoft.IdentityModel.Tokens;
 using EnglishGame.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using System.Runtime.Serialization;
+using EnglishGame.Data;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -19,37 +24,128 @@ namespace EnglishGame.Controllers
     [Route("api/[controller]")]
     public class TokenAuthController : Controller
     {
-        [HttpPost]
-        public string GetAuthToken([FromBody]UUser user)
+        private readonly ApplicationDbContext m_Context;
+        private readonly UserManager<UUser> m_UserManager;
+        private readonly SignInManager<UUser> m_SignInManager;
+
+        public TokenAuthController(ApplicationDbContext context, UserManager<UUser> userManager,
+            SignInManager<UUser> signInManager)
         {
-            var existUser = UserStorage.Users.FirstOrDefault(u => u.UserName == user.UserName && u.Password == user.Password);
+            m_Context = context;
+            m_UserManager = userManager;
+            m_SignInManager = signInManager;
+        }
 
-            if (existUser != null)
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register([FromBody]UUser user)
+        {
+            if (ModelState.IsValid)
             {
-                var requestAt = DateTime.Now;
-                var expiresIn = requestAt + TokenAuthOption.ExpiresSpan;
-                var token = GenerateToken(existUser, expiresIn);
-
-                return JsonConvert.SerializeObject(new RequestResult
+                var uUser = new UUser { UserName = user.Email, Email = user.Email };
+                var result = await m_UserManager.CreateAsync(uUser, user.Password);
+                if (result.Succeeded)
                 {
-                    State = RequestState.Success,
-                    Data = new
+                    if (ModelState.IsValid)
                     {
-                        requertAt = requestAt,
-                        expiresIn = TokenAuthOption.ExpiresSpan.TotalSeconds,
-                        tokeyType = TokenAuthOption.TokenType,
-                        accessToken = token
+                        var resultI = await m_SignInManager.PasswordSignInAsync(user.Email, user.Password, isPersistent: true, lockoutOnFailure: false);
+                        if (resultI.Succeeded)
+                        {
+                            var existUser = m_UserManager.GetUserAsync(HttpContext.User).Result;
+
+                            if (existUser != null)
+                            {
+                                var requestAt = DateTime.Now;
+                                var expiresIn = requestAt + TokenAuthOption.ExpiresSpan;
+                                var token = GenerateToken(existUser, expiresIn);
+
+                                return
+                                    Ok(
+                                    JsonConvert.SerializeObject(new RequestResult
+                                    {
+                                        State = RequestState.Success,
+                                        Data = new
+                                        {
+                                            requertAt = requestAt,
+                                            expiresIn = TokenAuthOption.ExpiresSpan.TotalSeconds,
+                                            tokeyType = TokenAuthOption.TokenType,
+                                            accessToken = token
+                                        }
+                                    })
+                                );
+                            }
+                            else
+                            {
+                                return Ok(JsonConvert.SerializeObject(new RequestResult
+                                {
+                                    State = RequestState.Failed,
+                                    Msg = "Username or password is invalid"
+                                }));
+                            }
+                        }
                     }
-                });
+                    return Ok(JsonConvert.SerializeObject(new RequestResult
+                    {
+                        State = RequestState.Failed,
+                        Msg = "Username or password is invalid"
+                    }));
+                }
             }
-            else
+            return Ok(false);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetAuthToken([FromBody]UUser user)
+        {
+            if (ModelState.IsValid)
             {
-                return JsonConvert.SerializeObject(new RequestResult
+                try
                 {
-                    State = RequestState.Failed,
-                    Msg = "Username or password is invalid"
-                });
+                    var result = await m_SignInManager.PasswordSignInAsync(user.Email, user.Password, isPersistent: true, lockoutOnFailure: false);
+                    if (result.Succeeded)
+                    {
+                        //var existUser = await m_UserManager.GetUserAsync(HttpContext.User);
+                        UUser existUser = m_Context.UUsers.SingleOrDefault(x => x.Email == user.Email);
+                        if (existUser != null)
+                        {
+                            var requestAt = DateTime.Now;
+                            var expiresIn = requestAt + TokenAuthOption.ExpiresSpan;
+                            var token = GenerateToken(existUser, expiresIn);
+
+                            return
+                                Ok(
+                                JsonConvert.SerializeObject(new RequestResult
+                                {
+                                    State = RequestState.Success,
+                                    Data = new
+                                    {
+                                        requertAt = requestAt,
+                                        expiresIn = TokenAuthOption.ExpiresSpan.TotalSeconds,
+                                        tokeyType = TokenAuthOption.TokenType,
+                                        accessToken = token
+                                    }
+                                })
+                            );
+                        }
+                        else
+                        {
+                            return Ok(JsonConvert.SerializeObject(new RequestResult
+                            {
+                                State = RequestState.Failed,
+                                Msg = "Username or password is invalid"
+                            }));
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    var ex = e;
+                }
             }
+            return Ok(JsonConvert.SerializeObject(new RequestResult
+            {
+                State = RequestState.Failed,
+                Msg = "Username or password is invalid"
+            }));
         }
 
         private string GenerateToken(UUser user, DateTime expires)
@@ -90,8 +186,6 @@ namespace EnglishGame.Controllers
             });
         }
     }
-
-    
 
     public static class UserStorage
     {

@@ -1,10 +1,21 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+﻿<md-grid-list cols="3">
+    <md-grid-tile></md-grid-tile>
+    <md-grid-tile [style.background]="'lightgreen'">
+        <div>
+            <div>
+                <md-input-container>
+                    <input mdInput type="email" [(ngModel)]="userName" placeholder="Email" />
+                </md-input-container>
+            </div>
+            <div>
+                <md-input-container>
+                    <input mdInput type="password" [(ngModel)]="password" placeholder="Password" />
+                </md-input-container>
+            </div>
+            <div>
+                <button md-button (click)="signin()">Sign In</button>
+            </div>
+        </div>
+    </md-grid-tile>
+    <md-grid-tile></md-grid-tile>
+</md-grid-list>

@@ -18,6 +18,7 @@ export class FeedService {
     updateMatch: Observable<Match>;
     addFeed: Observable<Feed>;
     addChatMessage: Observable<ChatMessage>;
+    addLol: Observable<string>;
 
     private connectionStateSubject = new Subject<SignalRConnectionStatus>();
     
@@ -25,6 +26,7 @@ export class FeedService {
     private updateMatchSubject = new Subject<Match>();
     private addFeedSubject = new Subject<Feed>();
     private addChatMessageSubject = new Subject<ChatMessage>();
+    private addLolSubject = new Subject<string>();
 
     private server: FeedServer;
 
@@ -35,6 +37,7 @@ export class FeedService {
         this.updateMatch = this.updateMatchSubject.asObservable();
         this.addFeed = this.addFeedSubject.asObservable();
         this.addChatMessage = this.addChatMessageSubject.asObservable();
+        this.addLol = this.addLolSubject.asObservable();
     }
 
     start(debug: boolean): Observable<SignalRConnectionStatus> {
@@ -57,6 +60,8 @@ export class FeedService {
 
         feedHub.client.addChatMessage = chatMessage => this.onAddChatMessage(chatMessage);
 
+        feedHub.client.messageReceived = msg => this.onMessageReceived(msg);
+
         // start the connection
         $.connection.hub.start()
             .done(response => this.setConnectionState(SignalRConnectionStatus.Connected))
@@ -74,6 +79,10 @@ export class FeedService {
     // Client side methods
     private onSetConnectionId(id: string) {
         this.setConnectionIdSubject.next(id);
+    }
+
+    private onMessageReceived(msg: string) {
+        this.addLolSubject.next(msg);
     }
 
     private onUpdateMatch(match: Match) {

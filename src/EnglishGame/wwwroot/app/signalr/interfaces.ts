@@ -13,6 +13,7 @@ export interface FeedClient {
     updateMatch: (match: Match) => void;
     addFeed: (feed: Feed) => void;
     addChatMessage: (chatMessage: ChatMessage) => void;
+    messageReceived: (msg: string) => void;
 }
 
 export interface FeedServer {

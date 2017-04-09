@@ -3,8 +3,10 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { GameService } from './game.service';
+import { FeedService } from "../signalr/feed.service";
 
-import { Round } from './round';
+import { URound } from './uround';
+import { UDuel } from './uduel';
 
 @Component({
     moduleId: module.id,
@@ -16,18 +18,34 @@ export class RoundDetailComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private location: Location,
-        private gameService: GameService) { }
+        private gameService: GameService,
+        private signalrService: FeedService) { }
 
     @Input()
-    round: Round;
+    round: URound;
+    duel: UDuel;
+    lol: string;
  
     ngOnInit(): void
     {
-        this.gameService.getRound(1).then(round => this.setRound(round));
+        this.gameService.getDuel(1).then(duel => this.setDuel(duel));
+
+        let self = this;
+
+        self.signalrService.addLol.subscribe(
+            lol => {
+                self.lol = lol;
+            }
+        )
     }
 
-    setRound(round: Round): void {
+    setRound(round: URound): void {
         this.round = round;
+    }
+
+    setDuel(duel: UDuel): void {
+        this.duel = duel;
+        this.round = duel.URounds[0];
     }
 
     leftChoice() {

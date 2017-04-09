@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 using EnglishGame.Models;
+using System;
 
 namespace EnglishGame.Hubs
 {
@@ -31,5 +32,6 @@ namespace EnglishGame.Hubs
         Task UpdateMatch(MatchViewModel match);
         Task AddFeed(FeedViewModel feed);
         Task AddChatMessage(ChatMessage message);
+        Task MessageReceived(string msg);
     }
 }

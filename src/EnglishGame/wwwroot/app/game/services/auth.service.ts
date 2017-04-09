@@ -2,7 +2,7 @@
 import { Headers, Http } from "@angular/http";
 import "rxjs/add/operator/toPromise";
 
-import { RequestResult } from "../_model/RequestResult";
+import { RequestResult } from "../models/request-result";
 
 @Injectable()
 export class AuthService {
@@ -14,8 +14,24 @@ export class AuthService {
     ) { }
 
     login(userName: string, password: string): Promise<RequestResult> {
-        return this.http.post("/api/TokenAuth", { Username: userName, Password: password }).toPromise()
+        return this.http.post("/api/TokenAuth", { Email: userName, Password: password }).toPromise()
             .then(response => {
+                let a = response.json();
+                let result = response.json() as RequestResult;
+                if (result.State == 1) {
+                    let json = result.Data as any;
+
+                    sessionStorage.setItem("token", json.accessToken);
+                }
+                return result;
+            })
+            .catch(this.handleError);
+    }
+
+    signup(userName: string, password: string): Promise<RequestResult> {
+        return this.http.post("/api/TokenAuth/Register", { Email: userName, Password: password }).toPromise()
+            .then(response => {
+                
                 let result = response.json() as RequestResult;
                 if (result.State == 1) {
                     let json = result.Data as any;

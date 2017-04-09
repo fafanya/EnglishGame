@@ -14,9 +14,10 @@ import { AccountComponent } from './game/account.component';
 import { RoundDetailComponent } from './game/round-detail.component';
 import { GameService } from './game/game.service';
 
-import { AuthService } from './game/login/_services/auth.service';
-import { HomeComponent } from './game/login/home/home.component';
-import { LoginComponent } from './game/login/login/login.component';
+import { AuthService } from './game/services/auth.service';
+import { SigninComponent } from './game/signin/signin.component';
+import { SignupComponent } from './game/signup/signup.component';
+import { SignalrService } from './game/services/signal.service';
 
 import 'hammerjs';
 
@@ -46,8 +47,8 @@ import { ChatComponent } from './signalr/chat.component';
         GameComponent,
         AccountComponent,
         RoundDetailComponent,
-        HomeComponent,
-        LoginComponent,
+        SigninComponent,
+        SignupComponent,
         ChatComponent,
         RHomeComponent,
         HighlightDirective,
@@ -58,7 +59,8 @@ import { ChatComponent } from './signalr/chat.component';
         AuthService,
         ConfigService,
         DataService,
-        GameService
+        GameService,
+        SignalrService
     ],
     bootstrap: [AppComponent]
 })

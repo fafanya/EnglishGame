@@ -67,8 +67,9 @@ namespace EnglishGame
                     .RequireAuthenticatedUser().Build());
             });
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            /*services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));*/
+            services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase());
 
             services.AddIdentity<UUser, IdentityRole>(options =>
             {
@@ -84,6 +85,7 @@ namespace EnglishGame
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+
 
 
             //----------------------------
@@ -166,7 +168,7 @@ namespace EnglishGame
                 }
             });
             #endregion
-
+            app.UseIdentity();
             app.Use(async (context, next) =>
             {
                 await next();
@@ -193,6 +195,7 @@ namespace EnglishGame
             app.UseStaticFiles();
             app.UseMvc(routes => { });
             app.UseSignalR();
+
 
             LiveGameDbInitializer.Initialize(app.ApplicationServices);
 
