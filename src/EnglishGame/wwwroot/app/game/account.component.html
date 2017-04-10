@@ -1,24 +1,13 @@
 <div *ngIf="isLogin">
-    <h1>Hi <span>{{userName}}</span></h1>
+    <h1>{{userName}}</h1>
     <div>
         <h1>Begin game</h1>
         <a routerLink="/round">Begin game</a>
+        <a routerLink="/duels">Duels</a>
     </div>
     <div>
-        <signout></signout>
-    </div>
-</div>
-
-<div *ngIf="!isLogin">
-    <div>
-        <h1>Please SignIn</h1>
-        <a routerLink="/signin">SignIn</a>
-    </div>
-    <div>
-        <h1>or SignUp</h1>
-        <a routerLink="/signup">SignUp</a>
-    </div>
-    <div>
-        <h1>Hi <span>{{lol}}</span></h1>
+        <div>
+            <button md-button (click)="signout()">Sign Out</button>
+        </div>
     </div>
 </div>

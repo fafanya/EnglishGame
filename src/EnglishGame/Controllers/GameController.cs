@@ -38,8 +38,6 @@ namespace EnglishGame.Controllers
             m_SignInManager = signInManager;
         }
 
-
-
         [HttpGet("GetRounds")]
         public IEnumerable<URound> GetRounds()
         {
@@ -52,8 +50,63 @@ namespace EnglishGame.Controllers
         [HttpGet("GetDuels")]
         public IEnumerable<UDuel> GetDuels()
         {
-            IEnumerable<UDuel> duels = m_Context.UDuels.Include(x=>x.URounds);
+            IEnumerable<UDuel> duels = m_Context.UDuels.Include(x=>x.URounds)
+                /*.Include(x=>x.PrimaryPlayer).Include(x=>x.SecondaryPlayer)*/;
             return duels;
+        }
+
+        [HttpGet("NewDuel")]
+        public string NewDuel()
+        {
+            string result;
+            UUser user = m_Context.UUsers.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            if (user != null)
+            {
+                UDuel duel = m_Context.UDuels.Include(x=>x.URounds)
+                    .FirstOrDefault(x => x.SecondaryPlayerId == null && !String.Equals(x.PrimaryPlayerId, user.Id));
+                if (duel == null)
+                {
+                    duel = new UDuel()
+                    {
+                        PrimaryPlayerId = user.Id
+                    };
+                    m_Context.UDuels.Add(duel);
+                    m_Context.SaveChanges();
+
+                    URound round = new URound()
+                    {
+                        UDuelId = duel.Id,
+                        Question = "2+4",
+                        LeftVariant = "6",
+                        RightVariant = "4"
+                    };
+                    m_Context.URounds.Add(round);
+                    m_Context.SaveChanges();
+                }
+                else
+                {
+                    duel.SecondaryPlayerId = user.Id;
+                    m_Context.SaveChanges();
+                }
+                duel = m_Context.UDuels.FirstOrDefault(x => x.Id == duel.Id);
+                duel.PrimaryPlayer = null;
+                duel.SecondaryPlayer = null;
+
+                result = JsonConvert.SerializeObject(new RequestResult
+                {
+                    State = RequestState.Success,
+                    Data = duel
+                });
+                return result;
+            }
+
+            result = JsonConvert.SerializeObject(new RequestResult
+            {
+                State = RequestState.Success,
+                Data = null
+            });
+
+            return result;
         }
 
         [Authorize("Bearer")]

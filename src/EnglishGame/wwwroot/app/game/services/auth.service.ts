@@ -44,7 +44,7 @@ export class AuthService {
     }
 
     signout(): Promise<RequestResult>{
-        sessionStorage.setItem("token", null);
+        sessionStorage.removeItem("token");
         return this.http.post("/api/TokenAuth", { }).toPromise()
             .then(response => {
                 let a = response.json();

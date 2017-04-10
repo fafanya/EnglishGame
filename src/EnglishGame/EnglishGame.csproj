@@ -33,20 +33,13 @@
     <Content Include="wwwroot\app\dashboard.component.html" />
     <Content Include="wwwroot\app\game\account.component.css" />
     <Content Include="wwwroot\app\game\account.component.html" />
+    <Content Include="wwwroot\app\game\duels.component.html" />
+    <Content Include="wwwroot\app\game\duels.component.ts" />
     <Content Include="wwwroot\app\game\game.component.html" />
     <Content Include="wwwroot\app\game\models\request-result.js" />
     <Content Include="wwwroot\app\game\models\request-result.ts" />
     <Content Include="wwwroot\app\game\round-detail.component.ts" />
     <Content Include="wwwroot\app\game\services\signal.service.ts" />
-    <Content Include="wwwroot\app\game\signout\signout.component.css" />
-    <Content Include="wwwroot\app\game\signout\signout.component.js" />
-    <Content Include="wwwroot\app\game\signout\signout.component.ts" />
-    <Content Include="wwwroot\app\game\signout\signup.component.css">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="wwwroot\app\game\signout\signout.component.html">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
     <Content Include="wwwroot\app\game\uduel.ts" />
     <Content Include="wwwroot\app\game\uround.component.js" />
     <Content Include="wwwroot\app\game\round-detail.component.html" />
@@ -60,6 +53,9 @@
     <Content Include="wwwroot\app\game\signup\signup.component.ts" />
     <Content Include="wwwroot\app\game\uround.js" />
     <Content Include="wwwroot\app\game\uround.ts" />
+    <Content Include="wwwroot\app\game\uuser.ts" />
+    <Content Include="wwwroot\app\interfaces.js" />
+    <Content Include="wwwroot\app\interfaces.ts" />
     <Content Include="wwwroot\app\issue-detail.component.css" />
     <Content Include="wwwroot\app\issue-detail.component.html" />
     <Content Include="wwwroot\app\issues.component.css">
@@ -69,6 +65,8 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Include="wwwroot\app\signalr\chat.component.html" />
+    <Content Include="wwwroot\app\signalr\interfaces.js" />
+    <Content Include="wwwroot\app\signalr\interfaces.ts" />
     <Content Include="wwwroot\app\signalr\match.component.html" />
     <Content Include="wwwroot\app\signalr\rhome.component.html" />
   </ItemGroup>

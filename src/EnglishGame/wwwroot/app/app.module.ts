@@ -12,12 +12,12 @@ import { IssueService } from './issue.service';
 import { GameComponent } from './game/game.component';
 import { AccountComponent } from './game/account.component';
 import { RoundDetailComponent } from './game/round-detail.component';
+import { DuelsComponent } from './game/duels.component';
 import { GameService } from './game/game.service';
 
 import { AuthService } from './game/services/auth.service';
 import { SigninComponent } from './game/signin/signin.component';
 import { SignupComponent } from './game/signup/signup.component';
-import { SignoutComponent } from './game/signout/signout.component';
 import { SignalrService } from './game/services/signal.service';
 
 import 'hammerjs';
@@ -50,11 +50,11 @@ import { ChatComponent } from './signalr/chat.component';
         RoundDetailComponent,
         SigninComponent,
         SignupComponent,
-        SignoutComponent,
         ChatComponent,
         RHomeComponent,
         HighlightDirective,
-        MatchComponent
+        MatchComponent,
+        DuelsComponent
     ],
     providers: [
         IssueService,

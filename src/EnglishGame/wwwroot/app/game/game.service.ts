@@ -31,7 +31,10 @@ export class GameService {
     getDuels(): Promise<UDuel[]> {
         return this.http.get(this.duelsUrl)
             .toPromise()
-            .then((response) => { return this.getResponseDuel(response); })
+            .then((response) =>
+            {
+                return this.getResponseDuel(response);
+            })
             .catch(this.handleError);
     }
 
@@ -40,11 +43,6 @@ export class GameService {
         let options = new RequestOptions({ headers: headers });
 
         this.authService.authPost(this.postAnswerUrl, { id });
-
-        /*return this.http.post(this.postAnswerUrl, { id }, options)
-            .map(this.extractData)
-            .catch(this.handleError)
-            .subscribe();*/
     }
 
     getRound(id: number): Promise<URound> {

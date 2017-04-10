@@ -9,6 +9,7 @@ import { AccountComponent } from './game/account.component';
 import { SigninComponent } from './game/signin/signin.component';
 import { SignupComponent } from './game/signup/signup.component';
 import { RoundDetailComponent } from './game/round-detail.component';
+import { DuelsComponent } from './game/duels.component';
 
 import { RHomeComponent } from './signalr/rhome.component';
 
@@ -53,6 +54,10 @@ const routes: Routes = [
     {
         path: 'round',
         component: RoundDetailComponent
+    },
+    {
+        path: 'duels',
+        component: DuelsComponent
     }
 ];
 
