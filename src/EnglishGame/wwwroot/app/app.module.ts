@@ -17,6 +17,7 @@ import { GameService } from './game/game.service';
 import { AuthService } from './game/services/auth.service';
 import { SigninComponent } from './game/signin/signin.component';
 import { SignupComponent } from './game/signup/signup.component';
+import { SignoutComponent } from './game/signout/signout.component';
 import { SignalrService } from './game/services/signal.service';
 
 import 'hammerjs';
@@ -49,6 +50,7 @@ import { ChatComponent } from './signalr/chat.component';
         RoundDetailComponent,
         SigninComponent,
         SignupComponent,
+        SignoutComponent,
         ChatComponent,
         RHomeComponent,
         HighlightDirective,

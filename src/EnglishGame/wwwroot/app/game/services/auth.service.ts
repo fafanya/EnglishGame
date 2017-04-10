@@ -43,7 +43,21 @@ export class AuthService {
             .catch(this.handleError);
     }
 
-    logout() { }
+    signout(): Promise<RequestResult>{
+        sessionStorage.setItem("token", null);
+        return this.http.post("/api/TokenAuth", { }).toPromise()
+            .then(response => {
+                let a = response.json();
+                let result = response.json() as RequestResult;
+                if (result.State == 1) {
+                    let json = result.Data as any;
+
+                    sessionStorage.setItem("token", json.accessToken);
+                }
+                return result;
+            })
+            .catch(this.handleError);
+    }
 
     checkLogin(): boolean {
         var token = sessionStorage.getItem(this.tokeyKey);

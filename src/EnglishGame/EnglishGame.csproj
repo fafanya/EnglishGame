@@ -38,6 +38,15 @@
     <Content Include="wwwroot\app\game\models\request-result.ts" />
     <Content Include="wwwroot\app\game\round-detail.component.ts" />
     <Content Include="wwwroot\app\game\services\signal.service.ts" />
+    <Content Include="wwwroot\app\game\signout\signout.component.css" />
+    <Content Include="wwwroot\app\game\signout\signout.component.js" />
+    <Content Include="wwwroot\app\game\signout\signout.component.ts" />
+    <Content Include="wwwroot\app\game\signout\signup.component.css">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\app\game\signout\signout.component.html">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="wwwroot\app\game\uduel.ts" />
     <Content Include="wwwroot\app\game\uround.component.js" />
     <Content Include="wwwroot\app\game\round-detail.component.html" />
