@@ -28,7 +28,13 @@ export class RoundDetailComponent implements OnInit {
  
     ngOnInit(): void
     {
-        this.gameService.getDuel(1).then(duel => this.setDuel(duel));
+        this.route.params.forEach((params: Params) => {
+            let id = +params['id'];
+            this.gameService.getRound(id)
+                .then(round => this.setRound(round));
+        });
+
+        //this.gameService.getDuel(1).then(duel => this.setDuel(duel));
 
         let self = this;
 

@@ -1,8 +1,9 @@
 ﻿<h2>Duels</h2>
 <button md-button (click)="newduel()">New Duel</button>
 <ul>
-    <li *ngFor="let duel of duels"
-        (click)="onSelect(duel)">
-        <span>{{duel.Id}}</span> {{duel.SecondaryPlayerId}}
+    <li *ngFor="let duel of duels">
+        <button md-button (click)="onSelect(duel)">
+            <span>{{duel.Id}}</span> {{duel.SecondaryPlayerId}}
+        </button>
     </li>
 </ul>

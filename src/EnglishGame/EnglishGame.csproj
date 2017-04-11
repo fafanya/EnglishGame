@@ -54,8 +54,6 @@
     <Content Include="wwwroot\app\game\uround.js" />
     <Content Include="wwwroot\app\game\uround.ts" />
     <Content Include="wwwroot\app\game\uuser.ts" />
-    <Content Include="wwwroot\app\interfaces.js" />
-    <Content Include="wwwroot\app\interfaces.ts" />
     <Content Include="wwwroot\app\issue-detail.component.css" />
     <Content Include="wwwroot\app\issue-detail.component.html" />
     <Content Include="wwwroot\app\issues.component.css">

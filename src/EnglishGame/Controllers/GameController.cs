@@ -41,9 +41,8 @@ namespace EnglishGame.Controllers
         [HttpGet("GetRounds")]
         public IEnumerable<URound> GetRounds()
         {
-            List<URound> rounds = new List<URound>();
-            URound round = new URound { Id = 1, Question = "2+2", LeftVariant = "7", RightVariant = "4" };
-            rounds.Add(round);
+            UUser user = m_Context.UUsers.FirstOrDefault(x => x.UserName == User.Identity.Name);
+            var rounds = m_Context.URounds;
             return rounds;
         }
 

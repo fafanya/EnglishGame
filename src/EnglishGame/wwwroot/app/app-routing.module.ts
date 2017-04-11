@@ -52,7 +52,7 @@ const routes: Routes = [
         component: RHomeComponent
     },
     {
-        path: 'round',
+        path: 'round/:id',
         component: RoundDetailComponent
     },
     {

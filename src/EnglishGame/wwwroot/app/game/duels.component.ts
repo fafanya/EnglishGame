@@ -32,6 +32,7 @@ export class DuelsComponent implements OnInit {
     }
 
     onSelect(duel: UDuel): void {
+        this.router.navigate(['/round', duel.URounds[0].Id]);
     }
 
     newduel(): void {
