@@ -34,10 +34,7 @@ export class RoundDetailComponent implements OnInit {
                 .then(round => this.setRound(round));
         });
 
-        //this.gameService.getDuel(1).then(duel => this.setDuel(duel));
-
         let self = this;
-
         self.signalrService.addLol.subscribe(
             lol => {
                 self.lol = lol;
