@@ -22,6 +22,7 @@ export class AuthService {
                     let json = result.Data as any;
 
                     sessionStorage.setItem("token", json.accessToken);
+                    sessionStorage.setItem("userid", json.userid);
                 }
                 return result;
             })
@@ -37,6 +38,7 @@ export class AuthService {
                     let json = result.Data as any;
 
                     sessionStorage.setItem("token", json.accessToken);
+                    sessionStorage.setItem("userid", json.userid);
                 }
                 return result;
             })
@@ -45,6 +47,7 @@ export class AuthService {
 
     signout(): Promise<RequestResult>{
         sessionStorage.removeItem("token");
+        sessionStorage.removeItem("userid");
         return this.http.post("/api/TokenAuth", { }).toPromise()
             .then(response => {
                 let a = response.json();

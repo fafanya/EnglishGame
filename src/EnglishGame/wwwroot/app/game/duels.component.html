@@ -6,7 +6,7 @@
 <ul>
     <li *ngFor="let duel of duels">
         <button md-button (click)="onSelect(duel)">
-            <span>{{duel.Id}}</span> {{duel.SecondaryPlayerId}}
+            <span>{{duel.Id}}</span> {{duel.SecondaryPlayerId}} || {{duel.Summary}}
         </button>
     </li>
 </ul>

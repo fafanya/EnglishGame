@@ -47,7 +47,7 @@ namespace EnglishGame.Data
                             var secondaryUser = new UUser { UserName = "lol@lol.lol", Email = "lol@lol.lol" };
                             result = await um.CreateAsync(secondaryUser, "lol");
 
-                            UDuel duel = new UDuel()
+                            /*UDuel duel = new UDuel()
                             {
                                 PrimaryPlayerId = primaryUser.Id,
                                 SecondaryPlayerId = secondaryUser.Id
@@ -63,7 +63,15 @@ namespace EnglishGame.Data
                                 RightVariant = "4"
                             };
                             context.URounds.Add(round);
-                            context.SaveChanges();
+                            round = new URound()
+                            {
+                                UDuelId = duel.Id,
+                                Question = "2+4",
+                                LeftVariant = "6",
+                                RightVariant = "4"
+                            };
+                            context.URounds.Add(round);
+                            context.SaveChanges();*/
                         }
                     }
                 }

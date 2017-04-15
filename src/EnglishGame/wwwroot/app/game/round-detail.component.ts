@@ -1,5 +1,5 @@
 ﻿import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { GameService } from './game.service';
@@ -19,7 +19,8 @@ export class RoundDetailComponent implements OnInit {
         private route: ActivatedRoute,
         private location: Location,
         private gameService: GameService,
-        private signalrService: FeedService) { }
+        private signalrService: FeedService,
+        private router: Router) { }
 
     @Input()
     round: URound;
@@ -30,8 +31,8 @@ export class RoundDetailComponent implements OnInit {
     {
         this.route.params.forEach((params: Params) => {
             let id = +params['id'];
-            this.gameService.getRound(id)
-                .then(round => this.setRound(round));
+            this.gameService.getDuel(id)
+                .then(duel => this.setDuel(duel));
         });
 
         let self = this;
@@ -48,17 +49,58 @@ export class RoundDetailComponent implements OnInit {
 
     setDuel(duel: UDuel): void {
         this.duel = duel;
-        this.round = duel.URounds[0];
+        var userid = sessionStorage.getItem("userid");
+        if (userid == this.duel.PrimaryPlayerId) {
+            if (duel.URounds[0].PrimaryAnswer == null) {
+                this.round = duel.URounds[0];
+            }
+        }
+        else if (userid == this.duel.SecondaryPlayerId) {
+            if (duel.URounds[0].SecondaryAnswer == null) {
+                this.round = duel.URounds[0];
+            }
+        }
     }
 
-    leftChoice() {
-        var b = 2 + 2;
-        this.gameService.postAnswer(b.toString());
+    leftChoice()
+    {
+        var userid = sessionStorage.getItem("userid");
+        if (userid == this.duel.PrimaryPlayerId) {
+            this.round.PrimaryAnswer = this.round.LeftVariant;
+        }
+        else if (userid == this.duel.SecondaryPlayerId) {
+            this.round.SecondaryAnswer = this.round.LeftVariant;
+        }
+        else {
+            return;
+        }
+        if (this.round.Index == 9){
+            this.gameService.postAnswer(this.duel);
+            this.router.navigate(['/duels']);
+        }
+        else {
+            this.round = this.duel.URounds[this.round.Index + 1];
+        }
     }
 
-    rightChoice() {
-        var a = 1 + 1;
-        this.gameService.postAnswer(a.toString());
+    rightChoice()
+    {
+        var userid = sessionStorage.getItem("userid");
+        if (userid == this.duel.PrimaryPlayerId) {
+            this.round.PrimaryAnswer = this.round.RightVariant;
+        }
+        else if (userid == this.duel.SecondaryPlayerId) {
+            this.round.SecondaryAnswer = this.round.RightVariant;
+        }
+        if (this.round.Index == 9)
+        {
+            this.gameService.postAnswer(this.duel);
+            this.router.navigate(['/duels']);
+        }
+        else
+        {
+            this.round = this.duel.URounds[this.round.Index + 1];
+        }
     }
 
     goBack(): void {

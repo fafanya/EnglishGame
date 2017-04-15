@@ -49,8 +49,22 @@ namespace EnglishGame.Controllers
         [HttpGet("GetDuels")]
         public IEnumerable<UDuel> GetDuels()
         {
-            IEnumerable<UDuel> duels = m_Context.UDuels.Include(x=>x.URounds)
-                /*.Include(x=>x.PrimaryPlayer).Include(x=>x.SecondaryPlayer)*/;
+            List<UDuel> duels = new List<UDuel>();
+            try
+            {
+                UUser user = m_Context.UUsers.FirstOrDefault(x => x.UserName == User.Identity.Name);
+                duels = m_Context.UDuels.Include(x => x.URounds)
+                    .Where(x => x.PrimaryPlayerId == user.Id || x.SecondaryPlayerId == user.Id).ToList();
+                foreach(UDuel d in duels)
+                {
+                    d.PrimaryPlayer = null;
+                    d.SecondaryPlayer = null;
+                }
+            }
+            catch(Exception e)
+            {
+                var error = e;
+            }
             return duels;
         }
 
@@ -65,25 +79,11 @@ namespace EnglishGame.Controllers
                     .FirstOrDefault(x => x.SecondaryPlayerId == null && !String.Equals(x.PrimaryPlayerId, user.Id));
                 if (duel == null)
                 {
-                    duel = new UDuel()
-                    {
-                        PrimaryPlayerId = user.Id
-                    };
-                    m_Context.UDuels.Add(duel);
-                    m_Context.SaveChanges();
-
-                    URound round = new URound()
-                    {
-                        UDuelId = duel.Id,
-                        Question = "2+4",
-                        LeftVariant = "6",
-                        RightVariant = "4"
-                    };
-                    m_Context.URounds.Add(round);
-                    m_Context.SaveChanges();
+                    duel = GenerateDuel(user.Id);
                 }
                 else
                 {
+                    duel.Summary += " - " + User.Identity.Name;
                     duel.SecondaryPlayerId = user.Id;
                     m_Context.SaveChanges();
                 }
@@ -110,27 +110,143 @@ namespace EnglishGame.Controllers
 
         [Authorize("Bearer")]
         [HttpPost("PostAnswer")]
-        public async Task<IActionResult> PostAnswer(/*[FromBody] object id*/)
+        public async Task<IActionResult> PostAnswer([FromBody] UDuel duel)
         {
+            string msg = String.Empty;
+            RequestState state = RequestState.Success;
+            object data = null;
+
             var claimsIdentity = User.Identity as ClaimsIdentity;
             try
             {
-                var t = await Clients.All.MessageReceived("Message received at: " + DateTime.Now.ToString());
+                msg = CheckAnswers(duel);
+                await Clients.Group(duel.Id.ToString()).MessageReceived(msg);
+                data = duel;
+                m_Context.UDuels.Update(duel);
+                m_Context.SaveChanges();
             }
             catch(Exception e)
             {
-                var ee = e;
+                state = RequestState.Failed;
+                msg = e.Message;
             }
-            var a = JsonConvert.SerializeObject(new RequestResult
-            {
-                State = RequestState.Success,
-                Data = new
-                {
-                    lol = "lol"
-                }
-            });
 
-            return Ok(a);
+            string result = JsonConvert.SerializeObject(new RequestResult
+            {
+                State = state,
+                Data = data,
+                Msg = msg
+            });
+            return Ok(result);
+        }
+
+        private UDuel GenerateDuel(string primaryPlayerId)
+        {
+            UDuel duel = new UDuel()
+            {
+                PrimaryPlayerId = primaryPlayerId,
+                URounds = new List<URound>(),
+                Summary = User.Identity.Name
+            };
+
+            Random random = new Random();
+            int min = 1000;
+            int max = 100000;
+            for (int i = 0; i < 10; i++)
+            {
+                int firstSummand = random.Next(min, max);
+                int secondSummand = random.Next(min, max);
+                int sum = firstSummand + secondSummand;
+
+                int fakeSum = random.Next(sum - 100, sum + 100);
+
+                URound round = new URound();
+                round.Question = firstSummand + "+" + secondSummand;
+                if (firstSummand % 2 == 0)
+                {
+                    round.LeftVariant = sum.ToString();
+                    round.RightVariant = fakeSum.ToString();
+                }
+                else
+                {
+                    round.RightVariant = sum.ToString();
+                    round.LeftVariant = fakeSum.ToString();
+                }
+                round.Index = i;
+                duel.URounds.Add(round);
+            }
+            m_Context.UDuels.Add(duel);
+            m_Context.SaveChanges();
+            return duel;
+        }
+        private string CheckAnswers(UDuel duel)
+        {
+            string message = String.Empty;
+            int primaryAmount = 0;
+            int secondaryAmount = 0;
+            bool isPalyed = true;
+            foreach(URound round in duel.URounds)
+            {
+                if (round.PrimaryAnswer == null || round.SecondaryAnswer == null)
+                {
+                    message = "Game not over...";
+                    isPalyed = false;
+                    break;
+                }
+                else
+                {
+                    string[] summands = round.Question.Split('+');
+                    int firstSummand = Convert.ToInt32(summands[0]);
+                    int secondSummand = Convert.ToInt32(summands[1]);
+
+                    int leftVariant = Convert.ToInt32(round.LeftVariant);
+                    int rightVariant = Convert.ToInt32(round.RightVariant);
+
+                    int primaryAnswer = Convert.ToInt32(round.PrimaryAnswer);
+                    int secondaryAnswer = Convert.ToInt32(round.SecondaryAnswer);
+
+                    if (leftVariant == (firstSummand + secondSummand))
+                    {
+                        if(primaryAnswer == leftVariant)
+                        {
+                            primaryAmount++;
+                        }
+                        if (secondaryAnswer == leftVariant)
+                        {
+                            secondaryAmount++;
+                        }
+                    }
+                    else if (rightVariant == (firstSummand + secondSummand))
+                    {
+                        if (primaryAnswer == rightVariant)
+                        {
+                            primaryAmount++;
+                        }
+                        if (secondaryAnswer == rightVariant)
+                        {
+                            secondaryAmount++;
+                        }
+                    }
+                    else
+                    {
+                        message = "Error";
+                        isPalyed = false;
+                        break;
+                    }
+                }
+            }
+            if (isPalyed)
+            {
+                UUser primaryPlayer = m_Context.UUsers.
+                    FirstOrDefault(x => x.Id == duel.PrimaryPlayerId);
+                UUser secondaryPlayer = m_Context.UUsers.
+                    FirstOrDefault(x => x.Id == duel.SecondaryPlayerId);
+
+                message = primaryPlayer.UserName + "   " + primaryAmount + "  :  " + secondaryAmount +
+                    "   " + secondaryPlayer.UserName;
+                duel.Summary = message;
+            }
+            return message;
         }
     }
 }

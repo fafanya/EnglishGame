@@ -35,8 +35,8 @@ export class DuelsComponent implements OnInit {
 
         let self = this;
         self.signalrService.addLol.subscribe(
-            lol => {
-                this.info = lol;
+            result => {
+                this.info = result;
                 this.gameService.getDuels().then(
                     duels => {
                         this.duels = duels;
@@ -48,7 +48,7 @@ export class DuelsComponent implements OnInit {
     }
 
     onSelect(duel: UDuel): void {
-        this.router.navigate(['/round', duel.URounds[0].Id]);
+        this.router.navigate(['/round', duel.Id]);
     }
 
     newduel(): void {

@@ -7,5 +7,6 @@ export class UDuel {
     PrimaryPlayer: UUser;
     SecondaryPlayerId: string;
     SecondaryPlayer: UUser;
+    Summary: string;
     URounds: URound[];
 }

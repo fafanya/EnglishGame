@@ -16,6 +16,8 @@ namespace EnglishGame.Models
         public string SecondaryPlayerId { get; set; }
         public UUser SecondaryPlayer { get; set; }
 
+        public string Summary { get; set; }
+
         public List<URound> URounds { get; set; }
     }
 }

@@ -68,7 +68,8 @@ namespace EnglishGame.Controllers
                                             requertAt = requestAt,
                                             expiresIn = TokenAuthOption.ExpiresSpan.TotalSeconds,
                                             tokeyType = TokenAuthOption.TokenType,
-                                            accessToken = token
+                                            accessToken = token,
+                                            userid = existUser.Id
                                         }
                                     })
                                 );
@@ -121,7 +122,8 @@ namespace EnglishGame.Controllers
                                         requertAt = requestAt,
                                         expiresIn = TokenAuthOption.ExpiresSpan.TotalSeconds,
                                         tokeyType = TokenAuthOption.TokenType,
-                                        accessToken = token
+                                        accessToken = token,
+                                        userid = existUser.Id
                                     }
                                 })
                             );

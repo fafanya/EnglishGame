@@ -38,11 +38,8 @@ export class GameService {
             .catch(this.handleError);
     }
 
-    postAnswer(id: string) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-
-        this.authService.authPost(this.postAnswerUrl, { id });
+    postAnswer(duel: UDuel) {
+        this.authService.authPost(this.postAnswerUrl, duel );
     }
 
     getRound(id: number): Promise<URound> {
