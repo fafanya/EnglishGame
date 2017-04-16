@@ -16,7 +16,7 @@ import { RHomeComponent } from './signalr/rhome.component';
 const routes: Routes = [
     {
         path: '',
-        redirectTo: '/dashboard',
+        redirectTo: '/game',
         pathMatch: 'full'
     },
     {

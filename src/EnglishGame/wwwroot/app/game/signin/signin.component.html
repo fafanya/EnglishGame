@@ -1,6 +1,7 @@
-﻿<md-grid-list cols="3">
-    <md-grid-tile></md-grid-tile>
-    <md-grid-tile [style.background]="'lightgreen'">
+﻿<md-grid-list cols="3" rowHeight="100px">
+    <md-grid-tile colspan="3"></md-grid-tile>
+    <md-grid-tile rowspan="3"></md-grid-tile>
+    <md-grid-tile rowspan="3" [style.background]="'lightgreen'">
         <div>
             <div>
                 <md-input-container>
@@ -17,5 +18,6 @@
             </div>
         </div>
     </md-grid-tile>
-    <md-grid-tile></md-grid-tile>
+    <md-grid-tile rowspan="3"></md-grid-tile>
+    <md-grid-tile colspan="3"></md-grid-tile>
 </md-grid-list>

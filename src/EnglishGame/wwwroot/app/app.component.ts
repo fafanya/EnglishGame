@@ -11,7 +11,6 @@ import { SignalRConnectionStatus } from './signalr/interfaces';
     providers: [FeedService]
 })
 export class AppComponent {
-    title = 'Tracker of Issues';
     constructor(private service: FeedService) { }
 
     ngOnInit() {
