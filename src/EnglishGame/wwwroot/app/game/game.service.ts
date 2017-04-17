@@ -16,7 +16,6 @@ export class GameService {
 
     constructor(private http: Http, private authService: AuthService) { }
 
-
     private roundsUrl = 'api/Game/GetRounds';
     private duelsUrl = 'api/Game/GetDuels';
     private postAnswerUrl = 'api/Game/PostAnswer';
@@ -39,7 +38,7 @@ export class GameService {
     }
 
     postAnswer(duel: UDuel) {
-        this.authService.authPost(this.postAnswerUrl, duel );
+        this.authService.authPost(this.postAnswerUrl, duel);
     }
 
     getRound(id: number): Promise<URound> {
