@@ -18,6 +18,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Newtonsoft.Json;
 using System.Security.Principal;
 using Microsoft.IdentityModel.Tokens;
+using EnglishGame.Common;
 
 namespace EnglishGame.Controllers
 {
@@ -71,6 +72,10 @@ namespace EnglishGame.Controllers
         [HttpGet("NewDuel")]
         public string NewDuel()
         {
+            double[] weights = new double[] { 0.25, 0.25, 0.25, 0.25 };
+            NeuralNetwork nn = new NeuralNetwork(weights);
+            List<Operation> operations = nn.GetOperations();
+
             string result;
             UUser user = m_Context.UUsers.FirstOrDefault(x => x.UserName == User.Identity.Name);
             if (user != null)
@@ -79,7 +84,7 @@ namespace EnglishGame.Controllers
                     .FirstOrDefault(x => x.SecondaryPlayerId == null && !String.Equals(x.PrimaryPlayerId, user.Id));
                 if (duel == null)
                 {
-                    duel = GenerateDuel(user.Id);
+                    duel = GenerateSumDuel(user.Id);
                 }
                 else
                 {
@@ -119,7 +124,7 @@ namespace EnglishGame.Controllers
             var claimsIdentity = User.Identity as ClaimsIdentity;
             try
             {
-                msg = CheckAnswers(duel);
+                msg = CheckSumAnswers(duel);
                 await Clients.Group(duel.Id.ToString()).MessageReceived(msg);
                 data = duel;
                 m_Context.UDuels.Update(duel);
@@ -140,7 +145,7 @@ namespace EnglishGame.Controllers
             return Ok(result);
         }
 
-        private UDuel GenerateDuel(string primaryPlayerId)
+        private UDuel GenerateSumDuel(string primaryPlayerId)
         {
             UDuel duel = new UDuel()
             {
@@ -179,7 +184,7 @@ namespace EnglishGame.Controllers
             m_Context.SaveChanges();
             return duel;
         }
-        private string CheckAnswers(UDuel duel)
+        private string CheckSumAnswers(UDuel duel)
         {
             string message = String.Empty;
             int primaryAmount = 0;
@@ -245,6 +250,12 @@ namespace EnglishGame.Controllers
                 message = primaryPlayer.UserName + "   " + primaryAmount + "  :  " + secondaryAmount +
                     "   " + secondaryPlayer.UserName;
                 duel.Summary = message;
+
+                double[] weights = new double[] { 0.25, 0.25, 0.25, 0.25 };
+                double[] trainOutput = new double[4] { 0, 1, 0, 1 };
+                NeuralNetwork nn = new NeuralNetwork(weights);
+                nn.Train(trainOutput);
+                weights = nn.Weights.ToArray();
             }
             return message;
         }
