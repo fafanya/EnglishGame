@@ -3,7 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
-import { AppComponent }   from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { AppComponent } from './app.component';
 import { IssueDetailComponent } from './issue-detail.component';
 import { IssuesComponent } from './issues.component';
 import { DashboardComponent } from './dashboard.component';
@@ -37,6 +39,7 @@ import { ChatComponent } from './signalr/chat.component';
         FormsModule,
         HttpModule,
         AppRoutingModule,
+        BrowserAnimationsModule,
         MaterialModule.forRoot()
     ],
     declarations:

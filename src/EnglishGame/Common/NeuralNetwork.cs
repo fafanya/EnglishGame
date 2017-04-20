@@ -26,6 +26,12 @@ namespace EnglishGame.Common
             double mult = 0.01;
             double[] output = GetOutput();
 
+            /*double[] b = new double[4];
+            for(int i = 0; i < b.Length; i++)
+            {
+                b[i] = -output[i] * (1 - output[i]) * (trainOuput[i] - output[i]);
+            }*/
+
             double[] delta = new double[4];
             for (int i = 0; i < m_Weights.Length; i++)
             {
@@ -72,6 +78,22 @@ namespace EnglishGame.Common
                 }
             }
             return output;
+        }
+
+        private double[] ActivationFunction(double[] inputs)
+        {
+            double[] outputs = new double[4];
+            for(int i = 0; i < inputs.Length; i++)
+            {
+                outputs[i] = Sigmoid(inputs[i]);
+            }
+            return outputs;
+        }
+
+        private double Sigmoid(double x)
+        {
+            double y = 1 / (1 + Math.Exp(-x));
+            return y;
         }
     }
 
