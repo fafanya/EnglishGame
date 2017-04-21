@@ -10,10 +10,13 @@
         </button>
     </li>
 </ul>
-<!--<div>
-    <md-chip-list>
-        <md-chip *ngFor="let duel of duels"(click)="onSelect(duel)">
+
+
+<md-chip-list class="mat-chip-list-stacked">
+    <md-chip *ngFor="let duel of duels"
+                (click)="onSelect(duel)"
+                selected="true"
+                color="accent">
             {{duel.Summary}}
-        </md-chip>
-    </md-chip-list>
-</div>-->
+    </md-chip>
+</md-chip-list>
