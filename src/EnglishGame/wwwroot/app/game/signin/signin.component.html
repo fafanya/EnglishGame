@@ -1,7 +1,7 @@
-﻿<md-grid-list cols="3" rowHeight="100px">
+<md-grid-list cols="3" rowHeight="100px">
     <md-grid-tile colspan="3"></md-grid-tile>
     <md-grid-tile rowspan="3"></md-grid-tile>
-    <md-grid-tile rowspan="3" [style.background]="'lightgreen'">
+    <md-grid-tile rowspan="3">
         <div>
             <div>
                 <md-input-container>
@@ -14,7 +14,7 @@
                 </md-input-container>
             </div>
             <div>
-                <button md-button (click)="signin()">Sign In</button>
+                <button md-raised-button color="accent" (click)="signin()">Sign In</button>
             </div>
         </div>
     </md-grid-tile>

@@ -1,6 +1,7 @@
-﻿import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UDuel } from './uduel';
+import { URound } from './uround';
 
 import { AuthService } from "./services/auth.service";
 import { GameService } from './game.service';
@@ -16,6 +17,8 @@ export class DuelsComponent implements OnInit {
     isLogin = false;
     duels: UDuel[];
     info: string;
+    selectedRound: URound;
+    selectedDuel: UDuel;
 
     private newduelUrl = 'api/Game/NewDuel';
 
@@ -27,6 +30,9 @@ export class DuelsComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+
+        this.info = 'LuaauLar123';
+        
         this.gameService.getDuels().then(
             duels => {
                 this.duels = duels;
@@ -48,7 +54,9 @@ export class DuelsComponent implements OnInit {
     }
 
     onSelect(duel: UDuel): void {
-        this.router.navigate(['/round', duel.Id]);
+        //this.router.navigate(['/round', duel.Id]);
+        this.selectedDuel = duel;
+        this.selectedRound = duel.URounds[0];
     }
 
     newduel(): void {

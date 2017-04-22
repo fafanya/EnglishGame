@@ -13,35 +13,20 @@ import { UDuel } from './uduel';
     selector: 'round',
     templateUrl: './round-detail.component.html'
 })
-export class RoundDetailComponent implements OnInit {
+export class RoundDetailComponent {
 
     constructor(
         private route: ActivatedRoute,
         private location: Location,
         private gameService: GameService,
         private signalrService: FeedService,
-        private router: Router) { }
-
-    @Input()
-    round: URound;
-    duel: UDuel;
-    lol: string;
- 
-    ngOnInit(): void
+        private router: Router)
     {
-        this.route.params.forEach((params: Params) => {
-            let id = +params['id'];
-            this.gameService.getDuel(id)
-                .then(duel => this.setDuel(duel));
-        });
-
-        let self = this;
-        self.signalrService.addLol.subscribe(
-            lol => {
-                self.lol = lol;
-            }
-        )
     }
+
+    @Input() round: URound;
+    @Input() duel: UDuel;
+    lol: string;
 
     setRound(round: URound): void {
         this.round = round;
