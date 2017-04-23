@@ -1,9 +1,17 @@
-<div *ngIf="isLogin">
-    <h1>{{userName}}</h1>
-    <div>
-        <a routerLink="/duels">Duels</a>
-    </div>
-    <div>
-        <button md-button (click)="signout()">Sign Out</button>
-    </div>
-</div>
+<md-grid-list cols="3" *ngIf="isLogin">
+    <md-grid-tile-header>
+        <button md-button style="margin: 10px" (click)="signout()">
+            Sign Out
+        </button>
+    </md-grid-tile-header>
+</md-grid-list>
+<md-grid-list cols="3" *ngIf="isLogin" rowHeight="50px">
+    <md-grid-tile colspan="3">
+        <h1 style="margin: 10px">{{userName}}</h1>
+    </md-grid-tile>
+    <md-grid-tile>
+        <button md-button routerLink="/duels">
+            Duels
+        </button>
+    </md-grid-tile>
+</md-grid-list>

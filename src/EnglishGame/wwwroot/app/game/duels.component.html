@@ -12,7 +12,7 @@
         </button>
     </md-grid-tile>
     <md-grid-tile colspan="2" [style.background]="'yellow'">
-        {{info}}
+        <div [innerHTML]=info></div>
     </md-grid-tile>
     <md-grid-tile></md-grid-tile>
     <md-grid-tile *ngIf="duels" [rowspan]="duels.length">

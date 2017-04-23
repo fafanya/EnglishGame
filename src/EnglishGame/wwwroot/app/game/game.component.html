@@ -1,10 +1,10 @@
-﻿<div>
-    <div>
-        <h1>Please SignIn</h1>
-        <a routerLink="/signin">SignIn</a>
-    </div>
-    <div>
-        <h1>or SignUp</h1>
-        <a routerLink="/signup">SignUp</a>
-    </div>
-</div>
+<md-grid-list cols="1">
+    <md-grid-tile-header>
+        <button md-raised-button style="margin: 10px" routerLink="/signin">
+            Sign In
+        </button>
+        <button md-raised-button style="margin: 10px" routerLink="/signup">
+            Sign Up
+        </button>
+    </md-grid-tile-header>
+</md-grid-list>

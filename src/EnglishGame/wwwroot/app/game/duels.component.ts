@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UDuel } from './uduel';
 import { URound } from './uround';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 import { AuthService } from "./services/auth.service";
 import { GameService } from './game.service';
@@ -16,7 +17,8 @@ import { FeedService } from "../signalr/feed.service";
 export class DuelsComponent implements OnInit {
     isLogin = false;
     duels: UDuel[];
-    info: string;
+    preInfo: string;
+    info: SafeHtml;
     selectedRound: URound;
     selectedDuel: UDuel;
 
@@ -26,12 +28,14 @@ export class DuelsComponent implements OnInit {
         private authService: AuthService,
         private router: Router,
         private gameService: GameService,
-        private signalrService: FeedService
+        private signalrService: FeedService,
+        private sanitizer: DomSanitizer
     ) { }
 
     ngOnInit(): void {
 
-        this.info = '...no information yet...';
+        this.preInfo = '...no information yet...';
+        this.info = this.sanitizer.bypassSecurityTrustHtml(this.preInfo);
         
         this.gameService.getDuels().then(
             duels => {
