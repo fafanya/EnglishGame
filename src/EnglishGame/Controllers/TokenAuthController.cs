@@ -51,9 +51,19 @@ namespace EnglishGame.Controllers
                         if (resultI.Succeeded)
                         {
                             var existUser = m_UserManager.GetUserAsync(HttpContext.User).Result;
-
                             if (existUser != null)
                             {
+                                UWeight w = new UWeight()
+                                    {
+                                        Sum = 0.25,
+                                        Sub = 0.25,
+                                        Mult = 0.25,
+                                        Div = 0.25,
+                                        UUserId = existUser.Id
+                                    }
+                                ;
+                                m_Context.UWeights.Add(w);
+
                                 var requestAt = DateTime.Now;
                                 var expiresIn = requestAt + TokenAuthOption.ExpiresSpan;
                                 var token = GenerateToken(existUser, expiresIn);
@@ -104,10 +114,25 @@ namespace EnglishGame.Controllers
                     var result = await m_SignInManager.PasswordSignInAsync(user.Email, user.Password, isPersistent: true, lockoutOnFailure: false);
                     if (result.Succeeded)
                     {
-                        //var existUser = await m_UserManager.GetUserAsync(HttpContext.User);
-                        UUser existUser = m_Context.UUsers.SingleOrDefault(x => x.Email == user.Email);
+                        UUser existUser = m_Context.UUsers.Include(x=>x.UWeight).
+                            SingleOrDefault(x => x.Email == user.Email);
                         if (existUser != null)
                         {
+                            if(existUser.UWeight == null)
+                            {
+                                UWeight w = new UWeight()
+                                {
+                                    Sum = 0.25,
+                                    Sub = 0.25,
+                                    Mult = 0.25,
+                                    Div = 0.25,
+                                    UUserId = existUser.Id
+                                }
+                                ;
+                                m_Context.UWeights.Add(w);
+                                m_Context.SaveChanges();
+                            }
+
                             var requestAt = DateTime.Now;
                             var expiresIn = requestAt + TokenAuthOption.ExpiresSpan;
                             var token = GenerateToken(existUser, expiresIn);

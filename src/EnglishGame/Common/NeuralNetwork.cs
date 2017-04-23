@@ -23,19 +23,14 @@ namespace EnglishGame.Common
 
         public void Train(double[] trainOuput)
         {
+            int[] userOuput = GetPostOutput(trainOuput);
+            int[] output = GetPostOutput(Weights.ToArray());
+
             double mult = 0.01;
-            double[] output = GetOutput();
-
-            /*double[] b = new double[4];
-            for(int i = 0; i < b.Length; i++)
-            {
-                b[i] = -output[i] * (1 - output[i]) * (trainOuput[i] - output[i]);
-            }*/
-
             double[] delta = new double[4];
             for (int i = 0; i < m_Weights.Length; i++)
             {
-                delta[i] = (trainOuput[i] - output[i]) * mult;
+                delta[i] = (userOuput[i] - output[i]) * mult;
             }
             for (int i = 0; i < m_Weights.Length; i++)
             {
@@ -43,65 +38,62 @@ namespace EnglishGame.Common
             }
         }
 
-        public List<Operation> GetOperations()
+        public int[] GetOutput()
         {
-            List<Operation> operations = new List<Operation>();
-            double[] output = GetOutput();
-            if(output[0] == 1)
-            {
-                operations.Add(Operation.Sum);
-            }
-            if (output[1] == 1)
-            {
-                operations.Add(Operation.Sub);
-            }
-            if (output[2] == 1)
-            {
-                operations.Add(Operation.Mult);
-            }
-            if (output[3] == 1)
-            {
-                operations.Add(Operation.Div);
-            }
-            return operations;
+            double[] preOutput = GetPreOutput();
+            int[] output = GetPostOutput(preOutput);
+            return output;
         }
 
-        private double[] GetOutput()
+        private double[] GetPreOutput()
         {
-            double[] thresholds = new double[] { 0.33, 0.33, 0.33, 0.33 };
-            double[] output = new double[4];
-            for(int i = 0; i < m_Weights.Length; i++)
+            double[] preOutput = new double[4];
+            double weightSum = m_Weights.Sum();
+            if (weightSum != 0)
             {
-                if(m_Weights[i] >= thresholds[i])
+                for (int i = 0; i < m_Weights.Length; i++)
                 {
-                    output[i] = 1;
+                    preOutput[i] = m_Weights[i] / weightSum;
+                }
+            }
+            return preOutput;
+        }
+        private int[] GetPostOutput(double[] preOutput)
+        {
+            int all = 10;
+            int[] output = new int[4];
+            for (int i = 0; i < m_Weights.Length; i++)
+            {
+                double dOutput = Math.Round(preOutput[i] * 10.0, MidpointRounding.AwayFromZero);
+                int iOutput = Convert.ToInt32(dOutput);
+                if (all - iOutput > 0)
+                {
+                    output[i] = iOutput;
+                    all -= iOutput;
+                }
+                else
+                {
+                    output[i] = all;
+                    all = 0;
+                }
+            }
+
+            while (all > 0)
+            {
+                for (int i = 0; i < output.Length; i++)
+                {
+                    if (all > 0)
+                    {
+                        output[i]++;
+                        all--;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
             }
             return output;
         }
-
-        private double[] ActivationFunction(double[] inputs)
-        {
-            double[] outputs = new double[4];
-            for(int i = 0; i < inputs.Length; i++)
-            {
-                outputs[i] = Sigmoid(inputs[i]);
-            }
-            return outputs;
-        }
-
-        private double Sigmoid(double x)
-        {
-            double y = 1 / (1 + Math.Exp(-x));
-            return y;
-        }
-    }
-
-    public enum Operation
-    {
-        Sum = 1,
-        Sub = 2,
-        Mult = 3,
-        Div = 4
     }
 }

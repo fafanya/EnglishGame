@@ -1,22 +1,24 @@
-﻿<div class="row" *ngIf="round && duel">
-    <div class="col-md-4"></div>
-    <div class="col-md-4 text-center">
-        <div>
-            {{round.Question}}
+﻿<div class="container-fluid" *ngIf="round && duel">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 text-center">
+            <div>
+                {{round.Question}}
+            </div>
         </div>
+        <div class="col-md-4 text"></div>
     </div>
-    <div class="col-md-4 text"></div>
-</div>
-<div class="row">
-    <div class="col-md-4 text-center">
-        <button md-button (click)="leftChoice()">
-            {{round.LeftVariant}}
-        </button>
-    </div>
-    <div class="col-md-4"></div>
-    <div class="col-md-4 text-center">
-        <button md-button (click)="rightChoice()">
-            {{round.RightVariant}}
-        </button>
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <button md-button (click)="leftChoice()">
+                {{round.LeftVariant}}
+            </button>
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4 text-center">
+            <button md-button (click)="rightChoice()">
+                {{round.RightVariant}}
+            </button>
+        </div>
     </div>
 </div>

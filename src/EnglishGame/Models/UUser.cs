@@ -16,5 +16,7 @@ namespace EnglishGame.Models
 
         [InverseProperty("SecondaryPlayer")]
         public List<UDuel> SecondaryPlayerUDuels { get; set; }
+
+        public UWeight UWeight { get; set; }
     }
 }

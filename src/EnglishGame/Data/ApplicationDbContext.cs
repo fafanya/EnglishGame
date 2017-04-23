@@ -16,7 +16,7 @@ namespace EnglishGame.Data
         public DbSet<UUser> UUsers { get; set; }
         public DbSet<UDuel> UDuels { get; set; }
         public DbSet<URound> URounds { get; set; }
-        //public DbSet<UMember> UMembers { get; set; }
+        public DbSet<UWeight> UWeights { get; set; }
         //public DbSet<UPayment> UPayments { get; set; }
         //public DbSet<UEventType> UEventTypes { get; set; }
         

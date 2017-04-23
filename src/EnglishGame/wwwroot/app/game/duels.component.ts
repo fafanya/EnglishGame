@@ -31,7 +31,7 @@ export class DuelsComponent implements OnInit {
 
     ngOnInit(): void {
 
-        this.info = 'LuaauLar123';
+        this.info = '...no information yet...';
         
         this.gameService.getDuels().then(
             duels => {

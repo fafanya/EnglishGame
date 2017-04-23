@@ -61,7 +61,7 @@ export class RoundDetailComponent {
         }
         if (this.round.Index == 9){
             this.gameService.postAnswer(this.duel);
-            this.router.navigate(['/duels']);
+            this.round = null;
         }
         else {
             this.round = this.duel.URounds[this.round.Index + 1];
@@ -80,7 +80,7 @@ export class RoundDetailComponent {
         if (this.round.Index == 9)
         {
             this.gameService.postAnswer(this.duel);
-            this.router.navigate(['/duels']);
+            this.round = null;
         }
         else
         {

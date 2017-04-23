@@ -5,19 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using EnglishGame.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using System.Runtime.Serialization;
 using EnglishGame.Data;
 using System.Security.Claims;
 using EnglishGame.Hubs;
 using Microsoft.AspNetCore.SignalR.Infrastructure;
-using EnglishGame.Auth;
-using System.IdentityModel.Tokens.Jwt;
 using Newtonsoft.Json;
-using System.Security.Principal;
-using Microsoft.IdentityModel.Tokens;
 using EnglishGame.Common;
 
 namespace EnglishGame.Controllers
@@ -72,10 +66,6 @@ namespace EnglishGame.Controllers
         [HttpGet("NewDuel")]
         public string NewDuel()
         {
-            double[] weights = new double[] { 0.25, 0.25, 0.25, 0.25 };
-            NeuralNetwork nn = new NeuralNetwork(weights);
-            List<Operation> operations = nn.GetOperations();
-
             string result;
             UUser user = m_Context.UUsers.FirstOrDefault(x => x.UserName == User.Identity.Name);
             if (user != null)
@@ -84,7 +74,7 @@ namespace EnglishGame.Controllers
                     .FirstOrDefault(x => x.SecondaryPlayerId == null && !String.Equals(x.PrimaryPlayerId, user.Id));
                 if (duel == null)
                 {
-                    duel = GenerateSumDuel(user.Id);
+                    duel = GenerateDuel(user.Id);
                 }
                 else
                 {
@@ -124,7 +114,7 @@ namespace EnglishGame.Controllers
             var claimsIdentity = User.Identity as ClaimsIdentity;
             try
             {
-                msg = CheckSumAnswers(duel);
+                msg = CheckAnswers(duel);
                 await Clients.Group(duel.Id.ToString()).MessageReceived(msg);
                 data = duel;
                 m_Context.UDuels.Update(duel);
@@ -145,7 +135,128 @@ namespace EnglishGame.Controllers
             return Ok(result);
         }
 
-        private UDuel GenerateSumDuel(string primaryPlayerId)
+        private UDuel GenerateDuel(string primaryPlayerId)
+        {
+            UDuel duel = new UDuel()
+            {
+                PrimaryPlayerId = primaryPlayerId,
+                URounds = new List<URound>(),
+                Summary = User.Identity.Name
+            };
+
+            UUser user = m_Context.UUsers.Include(x=>x.UWeight).
+                FirstOrDefault(x => x.UserName == User.Identity.Name);
+
+            NeuralNetwork nn = new NeuralNetwork(user.UWeight.GetWeights());
+            int[] output = nn.GetOutput();
+
+            int forSum = output[0];
+            int forSub = output[1];
+            int forMult = output[2];
+            int forDiv = output[3];
+
+            Random random = new Random();
+            int min = 10;
+            int max = 100;
+            for (int i=0;i< forSum; i++)
+            {
+                int firstSummand = random.Next(min, max);
+                int secondSummand = random.Next(min, max);
+                int sum = firstSummand + secondSummand;
+
+                int fakeSum = random.Next(sum - 5, sum + 5);
+
+                URound round = new URound();
+                round.Question = firstSummand + "+" + secondSummand;
+                if (firstSummand % 2 == 0)
+                {
+                    round.LeftVariant = sum.ToString();
+                    round.RightVariant = fakeSum.ToString();
+                }
+                else
+                {
+                    round.RightVariant = sum.ToString();
+                    round.LeftVariant = fakeSum.ToString();
+                }
+                round.Index = i;
+                duel.URounds.Add(round);
+            }
+            for (int i = 0; i < forSub; i++)
+            {
+                int firstSummand = random.Next(max-40, max);
+                int secondSummand = random.Next(min, min+40);
+                int sum = firstSummand - secondSummand;
+
+                int fakeSum = random.Next(sum - 5, sum + 5);
+
+                URound round = new URound();
+                round.Question = firstSummand + "-" + secondSummand;
+                if (firstSummand % 2 == 0)
+                {
+                    round.LeftVariant = sum.ToString();
+                    round.RightVariant = fakeSum.ToString();
+                }
+                else
+                {
+                    round.RightVariant = sum.ToString();
+                    round.LeftVariant = fakeSum.ToString();
+                }
+                round.Index = forSum+i;
+                duel.URounds.Add(round);
+            }
+            for (int i = 0; i < forMult; i++)
+            {
+                int firstSummand = random.Next(min, max-40);
+                int secondSummand = random.Next(min, max-40);
+                int sum = firstSummand * secondSummand;
+
+                int fakeSum = random.Next(sum - 5, sum + 5);
+
+                URound round = new URound();
+                round.Question = firstSummand + "*" + secondSummand;
+                if (firstSummand % 2 == 0)
+                {
+                    round.LeftVariant = sum.ToString();
+                    round.RightVariant = fakeSum.ToString();
+                }
+                else
+                {
+                    round.RightVariant = sum.ToString();
+                    round.LeftVariant = fakeSum.ToString();
+                }
+                round.Index = forSum+forSub+i;
+                duel.URounds.Add(round);
+            }
+            for (int i = 0; i < forDiv; i++)
+            {
+                int firstSummand = random.Next(max-40, max);
+                int secondSummand = random.Next(min, min+40);
+
+                int sum = firstSummand * secondSummand;
+                int fakeSum = random.Next(firstSummand - 5, firstSummand + 5);
+
+                URound round = new URound();
+                round.Question = sum + "/" + secondSummand;
+                if (firstSummand % 2 == 0)
+                {
+                    round.LeftVariant = firstSummand.ToString();
+                    round.RightVariant = fakeSum.ToString();
+                }
+                else
+                {
+                    round.RightVariant = firstSummand.ToString();
+                    round.LeftVariant = fakeSum.ToString();
+                }
+                round.Index = forSum + forSub + forMult + i;
+                duel.URounds.Add(round);
+            }
+
+            m_Context.UDuels.Add(duel);
+            m_Context.SaveChanges();
+            return duel;
+        }
+
+        private UDuel GenerateSum1Duel(string primaryPlayerId)
         {
             UDuel duel = new UDuel()
             {
@@ -184,13 +295,15 @@ namespace EnglishGame.Controllers
             m_Context.SaveChanges();
             return duel;
         }
-        private string CheckSumAnswers(UDuel duel)
+        private string CheckAnswers(UDuel duel)
         {
             string message = String.Empty;
             int primaryAmount = 0;
             int secondaryAmount = 0;
             bool isPalyed = true;
-            foreach(URound round in duel.URounds)
+            double[] pe = new double[4] { 0, 0, 0, 0 };
+            double[] se = new double[4] { 0, 0, 0, 0 };
+            foreach (URound round in duel.URounds)
             {
                 if (round.PrimaryAnswer == null || round.SecondaryAnswer == null)
                 {
@@ -200,7 +313,32 @@ namespace EnglishGame.Controllers
                 }
                 else
                 {
-                    string[] summands = round.Question.Split('+');
+                    string[] summands = null;
+                    char devider;
+                    if (round.Question.Contains("+"))
+                    {
+                        devider = '+';
+                    }
+                    else if (round.Question.Contains("-"))
+                    {
+                        devider = '-';
+                    }
+                    else if (round.Question.Contains("*"))
+                    {
+                        devider = '*';
+                    }
+                    else if (round.Question.Contains("/"))
+                    {
+                        devider = '/';
+                    }
+                    else
+                    {
+                        isPalyed = false;
+                        break;
+                    }
+
+                    summands = round.Question.Split(devider);
+
                     int firstSummand = Convert.ToInt32(summands[0]);
                     int secondSummand = Convert.ToInt32(summands[1]);
 
@@ -210,26 +348,50 @@ namespace EnglishGame.Controllers
                     int primaryAnswer = Convert.ToInt32(round.PrimaryAnswer);
                     int secondaryAnswer = Convert.ToInt32(round.SecondaryAnswer);
 
-                    if (leftVariant == (firstSummand + secondSummand))
+                    int output = -1;
+                    if(devider == '+')
                     {
-                        if(primaryAnswer == leftVariant)
+                        output = firstSummand + secondSummand;
+                    }
+                    else if(devider == '-')
+                    {
+                        output = firstSummand - secondSummand;
+                    }
+                    else if(devider == '*')
+                    {
+                        output = firstSummand * secondSummand;
+                    }
+                    else if(devider == '/')
+                    {
+                        output = firstSummand / secondSummand;
+                    }
+
+                    bool isPRight = false;
+                    bool isSRight = false;
+                    if (leftVariant == output)
+                    {
+                        if (primaryAnswer == leftVariant)
                         {
                             primaryAmount++;
+                            isPRight = true;
                         }
                         if (secondaryAnswer == leftVariant)
                         {
                             secondaryAmount++;
+                            isSRight = true;
                         }
                     }
-                    else if (rightVariant == (firstSummand + secondSummand))
+                    else if (rightVariant == output)
                     {
                         if (primaryAnswer == rightVariant)
                         {
                             primaryAmount++;
+                            isPRight = true;
                         }
                         if (secondaryAnswer == rightVariant)
                         {
                             secondaryAmount++;
+                            isSRight = true;
                         }
                     }
                     else
@@ -238,24 +400,107 @@ namespace EnglishGame.Controllers
                         isPalyed = false;
                         break;
                     }
+                    if (devider == '+')
+                    {
+                        if (!isPRight)
+                        {
+                            pe[0]++;
+                        }
+                        if (!isSRight)
+                        {
+                            se[0]++;
+                        }
+                    }
+                    else if (devider == '-')
+                    {
+                        if (!isPRight)
+                        {
+                            pe[1]++;
+                        }
+                        if (!isSRight)
+                        {
+                            se[1]++;
+                        }
+                    }
+                    else if (devider == '*')
+                    {
+                        if (!isPRight)
+                        {
+                            pe[2]++;
+                        }
+                        if (!isSRight)
+                        {
+                            se[2]++;
+                        }
+                    }
+                    else if (devider == '/')
+                    {
+                        if (!isPRight)
+                        {
+                            pe[3]++;
+                        }
+                        if (!isSRight)
+                        {
+                            se[3]++;
+                        }
+                    }
                 }
             }
             if (isPalyed)
             {
-                UUser primaryPlayer = m_Context.UUsers.
+                UUser pp = m_Context.UUsers.Include(x => x.UWeight).
                     FirstOrDefault(x => x.Id == duel.PrimaryPlayerId);
-                UUser secondaryPlayer = m_Context.UUsers.
+                UUser sp = m_Context.UUsers.Include(x => x.UWeight).
                     FirstOrDefault(x => x.Id == duel.SecondaryPlayerId);
 
-                message = primaryPlayer.UserName + "   " + primaryAmount + "  :  " + secondaryAmount +
-                    "   " + secondaryPlayer.UserName;
+                message = pp.UserName + "   " + primaryAmount + "  :  " + secondaryAmount +
+                    "   " + sp.UserName;
                 duel.Summary = message;
 
-                double[] weights = new double[] { 0.25, 0.25, 0.25, 0.25 };
-                double[] trainOutput = new double[4] { 0, 1, 0, 1 };
-                NeuralNetwork nn = new NeuralNetwork(weights);
-                nn.Train(trainOutput);
-                weights = nn.Weights.ToArray();
+                double[] weightsPP = new double[] { pp.UWeight.Sum,
+                    pp.UWeight.Sub, pp.UWeight.Mult, pp.UWeight.Div };
+                double[] weightsSP = new double[] { sp.UWeight.Sum,
+                    sp.UWeight.Sub, sp.UWeight.Mult, sp.UWeight.Div };
+
+                double peSum = pe.Sum();
+                double[] ptOutput = new double[4] { 0.0, 0.0, 0.0, 0.0 };
+                if (peSum != 0)
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        ptOutput[i] = pe[i] / peSum;
+                    }
+                }
+
+                NeuralNetwork ppnn = new NeuralNetwork(weightsPP);
+                ppnn.Train(ptOutput);
+                double[] nwPP = ppnn.Weights.ToArray();
+                pp.UWeight.Sum = nwPP[0];
+                pp.UWeight.Sub = nwPP[1];
+                pp.UWeight.Mult = nwPP[2];
+                pp.UWeight.Div = nwPP[3];
+                m_Context.Update(pp.UWeight);
+
+                double seSum = se.Sum();
+                double[] stOutput = new double[4] { 0.0, 0.0, 0.0, 0.0 };
+                if (seSum != 0)
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        stOutput[i] = se[i] / seSum;
+                    }
+                }
+
+                NeuralNetwork spnn = new NeuralNetwork(weightsSP);
+                spnn.Train(stOutput);
+                double[] nwSP = spnn.Weights.ToArray();
+                sp.UWeight.Sum = nwSP[0];
+                sp.UWeight.Sub = nwSP[1];
+                sp.UWeight.Mult = nwSP[2];
+                sp.UWeight.Div = nwSP[3];
+                m_Context.Update(sp.UWeight);
+
+                m_Context.SaveChanges();
             }
             return message;
         }
