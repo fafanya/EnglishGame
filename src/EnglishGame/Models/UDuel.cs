@@ -10,6 +10,9 @@ namespace EnglishGame.Models
     {
         public int Id { get; set; }
 
+        public int USubjectId { get; set; }
+        public USubject USubject { get; set; }
+
         public string PrimaryPlayerId { get; set; }
         public UUser PrimaryPlayer { get; set; }
 

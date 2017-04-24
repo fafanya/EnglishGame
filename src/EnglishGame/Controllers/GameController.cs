@@ -41,15 +41,16 @@ namespace EnglishGame.Controllers
             return rounds;
         }
 
-        [HttpGet("GetDuels")]
-        public IEnumerable<UDuel> GetDuels()
+        [HttpGet("GetDuels/{id}")]
+        public IEnumerable<UDuel> GetDuels([FromRoute] int id)
         {
             List<UDuel> duels = new List<UDuel>();
             try
             {
                 UUser user = m_Context.UUsers.FirstOrDefault(x => x.UserName == User.Identity.Name);
                 duels = m_Context.UDuels.Include(x => x.URounds)
-                    .Where(x => x.PrimaryPlayerId == user.Id || x.SecondaryPlayerId == user.Id).ToList();
+                    .Where(x => (x.USubjectId == id) &&
+                    (x.PrimaryPlayerId == user.Id || x.SecondaryPlayerId == user.Id)).ToList();
                 foreach(UDuel d in duels)
                 {
                     d.PrimaryPlayer = null;
@@ -63,18 +64,34 @@ namespace EnglishGame.Controllers
             return duels;
         }
 
-        [HttpGet("NewDuel")]
-        public string NewDuel()
+        [HttpGet("GetSubjects")]
+        public IEnumerable<USubject> GetSubjects()
+        {
+            List<USubject> duels = new List<USubject>();
+            try
+            {
+                duels = m_Context.USubjects.ToList();
+            }
+            catch (Exception e)
+            {
+                var error = e;
+            }
+            return duels;
+        }
+
+        [HttpGet("NewDuel/{id}")]
+        public string NewDuel([FromRoute] int id)
         {
             string result;
             UUser user = m_Context.UUsers.FirstOrDefault(x => x.UserName == User.Identity.Name);
             if (user != null)
             {
                 UDuel duel = m_Context.UDuels.Include(x=>x.URounds)
-                    .FirstOrDefault(x => x.SecondaryPlayerId == null && !String.Equals(x.PrimaryPlayerId, user.Id));
+                    .FirstOrDefault(x => x.USubjectId == id &&
+                    x.SecondaryPlayerId == null && !String.Equals(x.PrimaryPlayerId, user.Id));
                 if (duel == null)
                 {
-                    duel = GenerateDuel(user.Id);
+                    duel = GenerateDuel(id);
                 }
                 else
                 {
@@ -135,17 +152,18 @@ namespace EnglishGame.Controllers
             return Ok(result);
         }
 
-        private UDuel GenerateDuel(string primaryPlayerId)
+        private UDuel GenerateDuel(int subjectId)
         {
+            UUser user = m_Context.UUsers.Include(x => x.UWeight).
+                FirstOrDefault(x => x.UserName == User.Identity.Name);
+
             UDuel duel = new UDuel()
             {
-                PrimaryPlayerId = primaryPlayerId,
+                PrimaryPlayerId = user.Id,
+                USubjectId = subjectId,
                 URounds = new List<URound>(),
                 Summary = User.Identity.Name
             };
-
-            UUser user = m_Context.UUsers.Include(x=>x.UWeight).
-                FirstOrDefault(x => x.UserName == User.Identity.Name);
 
             NeuralNetwork nn = new NeuralNetwork(user.UWeight.GetWeights());
             int[] output = nn.GetOutput();

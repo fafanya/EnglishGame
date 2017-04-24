@@ -17,7 +17,7 @@ namespace EnglishGame.Data
         public DbSet<UDuel> UDuels { get; set; }
         public DbSet<URound> URounds { get; set; }
         public DbSet<UWeight> UWeights { get; set; }
-        //public DbSet<UPayment> UPayments { get; set; }
+        public DbSet<USubject> USubjects { get; set; }
         //public DbSet<UEventType> UEventTypes { get; set; }
         
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -47,6 +47,18 @@ namespace EnglishGame.Data
                             var secondaryUser = new UUser { UserName = "lol@lol.lol", Email = "lol@lol.lol" };
                             result = await um.CreateAsync(secondaryUser, "lol");
 
+                            USubject subjectMath = new USubject()
+                            {
+                                Name = "Math"
+                            };
+                            context.USubjects.Add(subjectMath);
+
+                            USubject subjectEnglish = new USubject()
+                            {
+                                Name = "English"
+                            };
+                            context.USubjects.Add(subjectEnglish);
+                            context.SaveChanges();
                             /*UDuel duel = new UDuel()
                             {
                                 PrimaryPlayerId = primaryUser.Id,

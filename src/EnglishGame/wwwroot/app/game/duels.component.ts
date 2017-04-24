@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { UDuel } from './uduel';
 import { URound } from './uround';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -21,12 +21,13 @@ export class DuelsComponent implements OnInit {
     info: SafeHtml;
     selectedRound: URound;
     selectedDuel: UDuel;
+    subjectId: number;
 
     private newduelUrl = 'api/Game/NewDuel';
 
     constructor(
         private authService: AuthService,
-        private router: Router,
+        private router: ActivatedRoute,
         private gameService: GameService,
         private signalrService: FeedService,
         private sanitizer: DomSanitizer
@@ -36,35 +37,35 @@ export class DuelsComponent implements OnInit {
 
         this.preInfo = '...no information yet...';
         this.info = this.sanitizer.bypassSecurityTrustHtml(this.preInfo);
+
+        this.router.params.forEach((params: Params) => {
+            this.subjectId = +params['id'];
+            this.gameService.getDuels(this.subjectId).then(
+                duels => {
+                    this.duels = duels;
+                });
+        });
         
-        this.gameService.getDuels().then(
-            duels => {
-                this.duels = duels;
-            }
-        );
 
         let self = this;
         self.signalrService.addLol.subscribe(
             result => {
                 this.info = result;
-                this.gameService.getDuels().then(
+                this.gameService.getDuels(this.subjectId).then(
                     duels => {
                         this.duels = duels;
-                        //this.signalrService.unsubscribeFromFeed(duel.Id);
-                    }
-                );
+                    });
             }
         )
     }
 
     onSelect(duel: UDuel): void {
-        //this.router.navigate(['/round', duel.Id]);
         this.selectedDuel = duel;
         this.selectedRound = duel.URounds[0];
     }
 
     newduel(): void {
-        this.authService.authGet(this.newduelUrl).then(
+        this.authService.authGet(this.newduelUrl + "/" + this.subjectId.toString()).then(
             result => {
                 var duel = result.Data as UDuel;
                 this.duels.push(duel);

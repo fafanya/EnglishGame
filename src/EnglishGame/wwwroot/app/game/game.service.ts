@@ -1,6 +1,7 @@
 ﻿import { URound } from './uround';
 import { UDuel } from './uduel';
-import { Headers, Http, Response, RequestOptions } from '@angular/http';
+import { USubject } from './usubject';
+import { Headers, Http, Response, RequestOptions, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 import { AuthService } from './services/auth.service';
@@ -8,7 +9,6 @@ import { AuthService } from './services/auth.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -18,21 +18,35 @@ export class GameService {
 
     private roundsUrl = 'api/Game/GetRounds';
     private duelsUrl = 'api/Game/GetDuels';
+    private subjectsUrl = 'api/Game/GetSubjects';
     private postAnswerUrl = 'api/Game/PostAnswer';
 
     getRounds(): Promise<URound[]> {
         return this.http.get(this.roundsUrl)
             .toPromise()
-            .then((response) => { return this.getResponse(response); })
+            .then((response) =>
+            {
+                return this.getResponse(response);
+            })
             .catch(this.handleError);
     }
 
-    getDuels(): Promise<UDuel[]> {
-        return this.http.get(this.duelsUrl)
+    getDuels(id: number): Promise<UDuel[]> {
+        return this.http.get(this.duelsUrl + "/" + id.toString())
             .toPromise()
             .then((response) =>
             {
                 return this.getResponseDuel(response);
+            })
+            .catch(this.handleError);
+    }
+
+    getSubjects(): Promise<USubject[]> {
+
+        return this.http.get(this.subjectsUrl)
+            .toPromise()
+            .then((response) => {
+                return response.json() as USubject[];
             })
             .catch(this.handleError);
     }
@@ -44,11 +58,6 @@ export class GameService {
     getRound(id: number): Promise<URound> {
         return this.getRounds()
             .then(rounds => rounds.find(round => round.Id === id));
-    }
-
-    getDuel(id: number): Promise<UDuel> {
-        return this.getDuels()
-            .then(duels => duels.find(duel => duel.Id === id));
     }
 
     private getResponse(response: Response): URound[] {

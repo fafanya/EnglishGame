@@ -2,6 +2,8 @@
 import { Router } from '@angular/router';
 import { AuthService } from "./services/auth.service";
 import { SignalrService } from "./services/signal.service";
+import { GameService } from "./game.service";
+import { USubject } from './usubject';
 
 @Component({
     moduleId: module.id,
@@ -13,8 +15,12 @@ export class AccountComponent implements OnInit {
     isLogin = false;
     userName: string;
 
-    constructor(private authService: AuthService,
+    usubjects: USubject[];
+
+    constructor(
+        private authService: AuthService,
         private signalrService: SignalrService,
+        private gameService: GameService,
         private router: Router){}
 
     ngOnInit(): void {
@@ -22,6 +28,7 @@ export class AccountComponent implements OnInit {
         if (this.isLogin) {
             this.authService.getUserInfo().then(res => {
                 this.userName = (res.Data as any).UserName;
+                this.getSubjects();
             });
         }
     }
@@ -30,6 +37,13 @@ export class AccountComponent implements OnInit {
         this.authService.signout()
             .then(result => {
                 this.router.navigate(["./game"]);
+            });
+    }
+
+    getSubjects() {
+        this.gameService.getSubjects()
+            .then(result => {
+                this.usubjects = result;
             });
     }
 }

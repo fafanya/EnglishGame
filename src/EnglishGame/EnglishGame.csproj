@@ -53,6 +53,7 @@
     <Content Include="wwwroot\app\game\signup\signup.component.ts" />
     <Content Include="wwwroot\app\game\uround.js" />
     <Content Include="wwwroot\app\game\uround.ts" />
+    <Content Include="wwwroot\app\game\usubject.ts" />
     <Content Include="wwwroot\app\game\uuser.ts" />
     <Content Include="wwwroot\app\issue-detail.component.css" />
     <Content Include="wwwroot\app\issue-detail.component.html" />

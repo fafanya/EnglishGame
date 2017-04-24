@@ -56,7 +56,7 @@ const routes: Routes = [
         component: RoundDetailComponent
     },
     {
-        path: 'duels',
+        path: 'duels/:id',
         component: DuelsComponent
     }
 ];

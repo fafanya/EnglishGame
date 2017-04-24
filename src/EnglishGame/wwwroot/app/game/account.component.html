@@ -9,9 +9,9 @@
     <md-grid-tile colspan="3">
         <h1 style="margin: 10px">{{userName}}</h1>
     </md-grid-tile>
-    <md-grid-tile>
-        <button md-button routerLink="/duels">
-            Duels
+    <md-grid-tile *ngIf="usubjects">
+        <button md-button [routerLink]="['/duels', usubject.Id]" *ngFor="let usubject of usubjects">
+            {{usubject.Name}}
         </button>
     </md-grid-tile>
 </md-grid-list>

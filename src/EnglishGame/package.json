@@ -34,7 +34,7 @@
     "typings": "^1.3.2"
   },
   "scripts": {
-    "start": "concurrently \"npm run watch\" \"npm run tsc:w\" \"tsc -w\" ",
+    "start": "concurrently \"npm run watch\" \"npm run tsc:w\"",
     "postinstall": "typings install",
     "tsc": "tsc",
     "tsc:w": "tsc -w",

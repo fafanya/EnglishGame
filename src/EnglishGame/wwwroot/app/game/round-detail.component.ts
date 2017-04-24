@@ -31,7 +31,7 @@ export class RoundDetailComponent {
         return this._round;
     }
     @Input() duel: UDuel;
-    spinnerValue: number;
+    countdown: number;
 
     constructor(
         private route: ActivatedRoute,
@@ -54,7 +54,7 @@ export class RoundDetailComponent {
         }
         else
         {
-            this.spinnerValue = (10 - t) * 10;
+            this.countdown = (10 - t) * 10;
         }
     }
 
