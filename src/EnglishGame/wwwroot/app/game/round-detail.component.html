@@ -1,12 +1,19 @@
 ﻿<div class="container-fluid" *ngIf="round && duel">
     <div class="row">
         <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4 text-center">
+            <md-progress-spinner [value]="spinnerValue"></md-progress-spinner>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4"></div>
         <div class="col-md-4 text-center">
             <div>
                 {{round.Question}}
             </div>
         </div>
-        <div class="col-md-4 text"></div>
+        <div class="col-md-4"></div>
     </div>
     <div class="row">
         <div class="col-md-4 text-center">
