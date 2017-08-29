@@ -25,6 +25,9 @@
             '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
             '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
             '@angular/material': 'npm:@angular/material/bundles/material.umd.js',
+            // CDK individual packages
+            '@angular/cdk': 'npm:@angular/cdk/bundles/cdk.umd.js',
+            //'@angular/cdk/a11y': 'npm:@angular/cdk/bundles/cdk-a11y.umd.js',
             // other libraries
             'rxjs': 'npm:rxjs',
             'angular-in-memory-web-api': 'npm:angular-in-memory-web-api',

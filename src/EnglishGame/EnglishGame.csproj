@@ -9,6 +9,7 @@
     <RuntimeIdentifiers>win10-x64</RuntimeIdentifiers>
     <RuntimeFrameworkVersion>1.1.1</RuntimeFrameworkVersion>
     <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
+    <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,59 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="round.component.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="wwwroot\app\app.component.css">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="wwwroot\app\app.component.html">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="wwwroot\app\dashboard.component.css" />
-    <Content Include="wwwroot\app\dashboard.component.html" />
-    <Content Include="wwwroot\app\game\account.component.css" />
-    <Content Include="wwwroot\app\game\account.component.html" />
-    <Content Include="wwwroot\app\game\duels.component.html" />
-    <Content Include="wwwroot\app\game\duels.component.ts" />
-    <Content Include="wwwroot\app\game\game.component.html" />
-    <Content Include="wwwroot\app\game\models\request-result.js" />
-    <Content Include="wwwroot\app\game\models\request-result.ts" />
-    <Content Include="wwwroot\app\game\round-detail.component.ts" />
-    <Content Include="wwwroot\app\game\services\signal.service.ts" />
-    <Content Include="wwwroot\app\game\uduel.ts" />
-    <Content Include="wwwroot\app\game\uround.component.js" />
-    <Content Include="wwwroot\app\game\round-detail.component.html" />
-    <Content Include="wwwroot\app\game\services\auth.service.js" />
-    <Content Include="wwwroot\app\game\services\auth.service.ts" />
-    <Content Include="wwwroot\app\game\signin\signin.component.css" />
-    <Content Include="wwwroot\app\game\signin\signin.component.html" />
-    <Content Include="wwwroot\app\game\signin\signin.component.ts" />
-    <Content Include="wwwroot\app\game\signup\signup.component.css" />
-    <Content Include="wwwroot\app\game\signup\signup.component.html" />
-    <Content Include="wwwroot\app\game\signup\signup.component.ts" />
-    <Content Include="wwwroot\app\game\uround.js" />
-    <Content Include="wwwroot\app\game\uround.ts" />
-    <Content Include="wwwroot\app\game\usubject.ts" />
-    <Content Include="wwwroot\app\game\uuser.ts" />
-    <Content Include="wwwroot\app\issue-detail.component.css" />
-    <Content Include="wwwroot\app\issue-detail.component.html" />
-    <Content Include="wwwroot\app\issues.component.css">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="wwwroot\app\issues.component.html">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="wwwroot\app\signalr\chat.component.html" />
-    <Content Include="wwwroot\app\signalr\interfaces.js" />
-    <Content Include="wwwroot\app\signalr\interfaces.ts" />
-    <Content Include="wwwroot\app\signalr\match.component.html" />
-    <Content Include="wwwroot\app\signalr\rhome.component.html" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="wwwroot\**\*;Views;Areas\**\Views">
+    <None Update="Views;Areas\**\Views">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
   </ItemGroup>
@@ -90,6 +39,9 @@
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.WebSockets" Version="1.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="1.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="1.1.1">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
@@ -105,6 +57,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="1.1.1" />
     <PackageReference Include="RecurrentTasks" Version="3.0.0-beta1" />
   </ItemGroup>

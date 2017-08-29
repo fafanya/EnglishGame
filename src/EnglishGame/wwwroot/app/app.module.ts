@@ -33,6 +33,8 @@ import { HighlightDirective } from './signalr/highlight.directive';
 import { MatchComponent } from './signalr/match.component';
 import { ChatComponent } from './signalr/chat.component';
 
+import { AdminComponent } from './admin/admin.component';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -40,7 +42,7 @@ import { ChatComponent } from './signalr/chat.component';
         HttpModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        MaterialModule.forRoot()
+        MaterialModule
     ],
     declarations:
     [
@@ -57,7 +59,8 @@ import { ChatComponent } from './signalr/chat.component';
         RHomeComponent,
         HighlightDirective,
         MatchComponent,
-        DuelsComponent
+        DuelsComponent,
+        AdminComponent
     ],
     providers: [
         IssueService,
