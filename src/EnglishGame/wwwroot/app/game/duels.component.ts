@@ -67,7 +67,8 @@ export class DuelsComponent implements OnInit {
     newduel(): void {
         this.authService.authGet(this.newduelUrl + "/" + this.subjectId.toString()).then(
             result => {
-                var duel = result.Data as UDuel;
+                var temp = result.Data;
+                var duel = temp as UDuel;
                 this.duels.push(duel);
                 this.signalrService.subscribeToFeed(duel.Id);
             }

@@ -80,9 +80,9 @@ namespace EnglishGame.Controllers
         }
 
         [HttpGet("NewDuel/{id}")]
-        public string NewDuel([FromRoute] int id)
+        public RequestResult NewDuel([FromRoute] int id)
         {
-            string result = null;
+            RequestResult result = null;
             try
             {
                 UUser user = m_Context.UUsers.FirstOrDefault(x => x.UserName == User.Identity.Name);
@@ -105,19 +105,19 @@ namespace EnglishGame.Controllers
                     duel.PrimaryPlayer = null;
                     duel.SecondaryPlayer = null;
 
-                    result = JsonConvert.SerializeObject(new RequestResult
+                    result =  new RequestResult
                     {
                         State = RequestState.Success,
                         Data = duel
-                    });
+                    };
                     return result;
                 }
 
-                result = JsonConvert.SerializeObject(new RequestResult
+                result = new RequestResult
                 {
                     State = RequestState.Success,
                     Data = null
-                });
+                };
             }
             catch(Exception e)
             {
