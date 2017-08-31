@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using EnglishGame.Data.Abstract;
 using EnglishGame.Models;
 using Microsoft.Extensions.Logging;
 using RecurrentTasks;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace EnglishGame.Core
 {
@@ -18,7 +21,7 @@ namespace EnglishGame.Core
             this.logger = logger;
             this._matchRepository = matchRepository;
         }
-        public void Run(TaskRunStatus taskRunStatus)
+        public void Run(ITask currentTask, CancellationToken cancellationToken)
         {
             var msg = string.Format("Run at: {0}", DateTimeOffset.Now);
             logger.LogDebug(msg);
@@ -28,6 +31,7 @@ namespace EnglishGame.Core
         private async void UpdateScore()
         {
             IEnumerable<Match> _matches = _matchRepository.GetAll();
+            return;
 
             foreach (var match in _matches)
             {
@@ -53,10 +57,13 @@ namespace EnglishGame.Core
                     score.GuestScore = 0;
                     _matchEnded = true;
                 }
+
                 // Update Score for all clients
                 using (var client = new HttpClient())
                 {
-                    await client.PutAsJsonAsync<MatchScore>(Startup.API_URL + "matches/" + match.Id, score);
+                    var json = JsonConvert.SerializeObject(score);
+                    var stringContent = new StringContent(json, Encoding.UTF8 , "application/json");
+                    await client.PutAsync(Startup.API_URL + "matches/" + match.Id, stringContent);
                 }
 
                 // Update Feed for subscribed only clients
@@ -72,7 +79,9 @@ namespace EnglishGame.Core
                 };
                 using (var client = new HttpClient())
                 {
-                    await client.PostAsJsonAsync<FeedViewModel>(Startup.API_URL + "feeds", _feed);
+                    var json = JsonConvert.SerializeObject(_feed);
+                    var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+                    await client.PostAsync(Startup.API_URL + "feeds", stringContent);
                 }
             }
         }

@@ -61,12 +61,14 @@ export class GameService {
     }
 
     private getResponse(response: Response): URound[] {
-        var j = response.json() as URound[];
+        var a = response.json();
+        var j = a as URound[];
         return j;
     }
 
     private getResponseDuel(response: Response): UDuel[] {
-        var j = response.json() as UDuel[];
+        var a = response.json();
+        var j = a as UDuel[];
         return j;
     }
 

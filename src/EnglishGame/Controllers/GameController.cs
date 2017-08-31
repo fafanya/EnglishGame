@@ -42,7 +42,7 @@ namespace EnglishGame.Controllers
         }
 
         [HttpGet("GetDuels/{id}")]
-        public IEnumerable<UDuel> GetDuels([FromRoute] int id)
+        public List<UDuel> GetDuels([FromRoute] int id)
         {
             List<UDuel> duels = new List<UDuel>();
             try
@@ -82,41 +82,47 @@ namespace EnglishGame.Controllers
         [HttpGet("NewDuel/{id}")]
         public string NewDuel([FromRoute] int id)
         {
-            string result;
-            UUser user = m_Context.UUsers.FirstOrDefault(x => x.UserName == User.Identity.Name);
-            if (user != null)
+            string result = null;
+            try
             {
-                UDuel duel = m_Context.UDuels.Include(x=>x.URounds)
-                    .FirstOrDefault(x => x.USubjectId == id &&
-                    x.SecondaryPlayerId == null && !String.Equals(x.PrimaryPlayerId, user.Id));
-                if (duel == null)
+                UUser user = m_Context.UUsers.FirstOrDefault(x => x.UserName == User.Identity.Name);
+                if (user != null)
                 {
-                    duel = GenerateDuel(id);
+                    UDuel duel = m_Context.UDuels.Include(x => x.URounds)
+                        .FirstOrDefault(x => x.USubjectId == id &&
+                        x.SecondaryPlayerId == null && !String.Equals(x.PrimaryPlayerId, user.Id));
+                    if (duel == null)
+                    {
+                        duel = GenerateDuel(id);
+                    }
+                    else
+                    {
+                        duel.Summary += " - " + User.Identity.Name;
+                        duel.SecondaryPlayerId = user.Id;
+                        m_Context.SaveChanges();
+                    }
+                    duel = m_Context.UDuels.FirstOrDefault(x => x.Id == duel.Id);
+                    duel.PrimaryPlayer = null;
+                    duel.SecondaryPlayer = null;
+
+                    result = JsonConvert.SerializeObject(new RequestResult
+                    {
+                        State = RequestState.Success,
+                        Data = duel
+                    });
+                    return result;
                 }
-                else
-                {
-                    duel.Summary += " - " + User.Identity.Name;
-                    duel.SecondaryPlayerId = user.Id;
-                    m_Context.SaveChanges();
-                }
-                duel = m_Context.UDuels.FirstOrDefault(x => x.Id == duel.Id);
-                duel.PrimaryPlayer = null;
-                duel.SecondaryPlayer = null;
 
                 result = JsonConvert.SerializeObject(new RequestResult
                 {
                     State = RequestState.Success,
-                    Data = duel
+                    Data = null
                 });
-                return result;
             }
-
-            result = JsonConvert.SerializeObject(new RequestResult
+            catch(Exception e)
             {
-                State = RequestState.Success,
-                Data = null
-            });
-
+                var ex = e;
+            }
             return result;
         }
 
