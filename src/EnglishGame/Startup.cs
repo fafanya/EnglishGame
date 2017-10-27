@@ -27,6 +27,7 @@ using EnglishGame.Core.Mappings;
 using Newtonsoft.Json.Serialization;
 using RecurrentTasks;
 using EnglishGame.Core;
+using EnglishGame.Hubs;
 
 namespace EnglishGame
 {
@@ -127,7 +128,7 @@ namespace EnglishGame
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver =
                     new DefaultContractResolver());
 
-            services.AddSignalR(options => options.Hubs.EnableDetailedErrors = true);
+            services.AddSignalR();
 
             services.AddTask<FeedEngine>();
         }
@@ -198,7 +199,9 @@ namespace EnglishGame
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseMvc(routes => { });
-            app.UseSignalR();
+            app.UseSignalR(routes => {
+                routes.MapHub<Broadcastert>("broadcastert");
+            });
 
 
             LiveGameDbInitializer.Initialize(app.ApplicationServices);

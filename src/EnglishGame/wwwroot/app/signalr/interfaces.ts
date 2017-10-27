@@ -1,7 +1,8 @@
-/* SignalR related interfaces  */
-export interface FeedSignalR extends SignalR {
+//import * as SignalR from "@aspnet/signalr-client";
+
+/*export interface FeedSignalR extends SignalR {
     broadcastert: FeedProxy
-}
+}*/
 
 export interface FeedProxy {
     client: FeedClient;

@@ -20,7 +20,6 @@ import { GameService } from './game/game.service';
 import { AuthService } from './game/services/auth.service';
 import { SigninComponent } from './game/signin/signin.component';
 import { SignupComponent } from './game/signup/signup.component';
-import { SignalrService } from './game/services/signal.service';
 
 import 'hammerjs';
 
@@ -67,8 +66,7 @@ import { AdminComponent } from './admin/admin.component';
         AuthService,
         ConfigService,
         DataService,
-        GameService,
-        SignalrService
+        GameService
     ],
     bootstrap: [AppComponent]
 })

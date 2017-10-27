@@ -11,15 +11,14 @@
     <!-- 1. Load libraries -->
     <script src="lib/jquery/dist/jquery.js"></script>
     <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="lib/signalr/jquery.signalR.js"></script>
     <!-- Polyfill(s) for older browsers -->
     <script src="node_modules/core-js/client/shim.min.js"></script>
     <script src="node_modules/zone.js/dist/zone.js"></script>
     <script src="node_modules/reflect-metadata/Reflect.js"></script>
     <script src="node_modules/systemjs/dist/system.src.js"></script>
     <!-- 2. Configure SystemJS -->
-    <script src="/signalr/js"></script>
     <script src="js/systemjs.config.js"></script>
+    <script src="js/signalr-client-1.0.0-alpha2-final.js"></script>
     <script>
       System.import('app').catch(function(err){ console.error(err); });
     </script>

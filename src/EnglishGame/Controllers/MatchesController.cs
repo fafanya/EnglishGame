@@ -1,23 +1,26 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR.Infrastructure;
+using Microsoft.AspNetCore.SignalR;
 using EnglishGame.Hubs;
 using EnglishGame.Data.Abstract;
 using EnglishGame.Models;
 using AutoMapper;
+using System;
 
 namespace EnglishGame.Controllers
 {
     [Route("api/[controller]")]
-    public class MatchesController : ApiHubController<Broadcastert>
+    public class MatchesController : Controller
     {
         IMatchRepository _matchRepository;
+        IHubContext<Broadcastert> m_HubContext;
+
         public MatchesController(
-            IConnectionManager signalRConnectionManager,
+            IHubContext<Broadcastert> hubContext,
             IMatchRepository matchRepository)
-        : base(signalRConnectionManager)
         {
             _matchRepository = matchRepository;
+            m_HubContext = hubContext;
         }
 
         // GET api/values
@@ -46,7 +49,7 @@ namespace EnglishGame.Controllers
             _matchRepository.Commit();
 
             MatchViewModel _matchVM = Mapper.Map<Match, MatchViewModel>(_match);
-            await Clients.All.UpdateMatch(_matchVM);
+            await m_HubContext.Clients.All.InvokeAsync("UpdateMatch", _matchVM);
         }
     }
 }

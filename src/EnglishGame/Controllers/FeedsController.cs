@@ -1,25 +1,28 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR.Infrastructure;
+using Microsoft.AspNetCore.SignalR;
 using EnglishGame.Hubs;
 using EnglishGame.Data.Abstract;
 using EnglishGame.Models;
 using AutoMapper;
+using System;
 
 namespace EnglishGame.Controllers
 {
     [Route("api/[controller]")]
-    public class FeedsController : ApiHubController<Broadcastert>
+    public class FeedsController : Controller
     {
         IFeedRepository _feedRepository;
         IMatchRepository _matchRepository;
+        IHubContext<Broadcastert> m_HubContext;
+
         public FeedsController(
-            IConnectionManager signalRConnectionManager,
+            IHubContext<Broadcastert> hubContext,
             IFeedRepository feedRepository,
             IMatchRepository matchRepository)
-        : base(signalRConnectionManager)
         {
             _feedRepository = feedRepository;
             _matchRepository = matchRepository;
+            m_HubContext = hubContext;
         }
 
         // POST api/feeds
@@ -40,7 +43,7 @@ namespace EnglishGame.Controllers
 
             FeedViewModel _feedVM = Mapper.Map<Feed, FeedViewModel>(_matchFeed);
 
-            await Clients.Group(feed.MatchId.ToString()).AddFeed(_feedVM);
+            await m_HubContext.Clients.Group(feed.MatchId.ToString()).InvokeAsync("AddFeed", _feedVM);
         }
 
     }

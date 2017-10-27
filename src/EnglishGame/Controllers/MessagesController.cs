@@ -1,25 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR.Infrastructure;
+using Microsoft.AspNetCore.SignalR;
 using EnglishGame.Hubs;
 using EnglishGame.Models;
+using System;
 
 namespace EnglishGame.Controllers
 {
     [Route("api/[controller]")]
-    public class MessagesController : ApiHubController<Broadcastert>
+    public class MessagesController : Controller
     {
-        public MessagesController(
-            IConnectionManager signalRConnectionManager)
-        : base(signalRConnectionManager)
+        IHubContext<Broadcastert> m_HubContext;
+        public MessagesController(IHubContext<Broadcastert> hubContext)
         {
-
+            m_HubContext = hubContext;
         }
 
         // POST api/messages
         [HttpPost]
         public void Post([FromBody]ChatMessage message)
         {
-            this.Clients.Group(message.MatchId.ToString()).AddChatMessage(message);
+            m_HubContext.Clients.Group(message.MatchId.ToString()).InvokeAsync("AddChatMessage", message);
         }
     }
 }

@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using EnglishGame.Data;
 using System.Security.Claims;
 using EnglishGame.Hubs;
-using Microsoft.AspNetCore.SignalR.Infrastructure;
+using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
 using EnglishGame.Common;
 
@@ -18,19 +18,23 @@ namespace EnglishGame.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
-    public class GameController : ApiHubController<Broadcastert>
+    public class GameController : Controller
     {
         private readonly ApplicationDbContext m_Context;
         private readonly UserManager<UUser> m_UserManager;
         private readonly SignInManager<UUser> m_SignInManager;
+        private readonly IHubContext<Broadcastert> m_HubContext;
 
-        public GameController(ApplicationDbContext context, UserManager<UUser> userManager,
-            SignInManager<UUser> signInManager, IConnectionManager signalRConnectionManager)
-            : base(signalRConnectionManager)
+        public GameController(
+            ApplicationDbContext context,
+            UserManager<UUser> userManager,
+            SignInManager<UUser> signInManager,
+            IHubContext<Broadcastert> hubContext)
         {
             m_Context = context;
             m_UserManager = userManager;
             m_SignInManager = signInManager;
+            m_HubContext = hubContext;
         }
 
         [HttpGet("GetRounds")]
@@ -138,7 +142,7 @@ namespace EnglishGame.Controllers
             try
             {
                 msg = CheckAnswers(duel);
-                await Clients.Group(duel.Id.ToString()).MessageReceived(msg);
+                await m_HubContext.Clients.Group(duel.Id.ToString()).InvokeAsync("MessageReceived",msg);
                 data = duel;
                 m_Context.UDuels.Update(duel);
                 m_Context.SaveChanges();

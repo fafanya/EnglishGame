@@ -42,8 +42,20 @@
             '@angular/cdk': 'npm:@angular/cdk/bundles/cdk.umd.js',
             // other libraries
             'rxjs': 'npm:rxjs',
-            'angular-in-memory-web-api': 'npm:angular-in-memory-web-api',
-            'hammerjs': 'npm:hammerjs/hammer.js'
+            //aspnet/signalr-client
+            //'@aspnet/signalr-client': 'npm:@aspnet/signalr-client/dist/src',
+            '@aspnet/signalr-client': 'npm:@aspnet/signalr-client/dist/browser/signalr-client-1.0.0-alpha2-final.js',
+            'hammerjs': 'npm:hammerjs/hammer.js',
+            'msgpack5': 'npm:msgpack5/index.js',
+            'safe-buffer': 'npm:safe-buffer/index.js',
+            'buffer': 'npm:buffer/index.js',
+            'base64-js': 'npm:buffer/index.js',
+            'ieee754': 'npm:ieee754/index.js',
+            'assert': 'npm:assert/assert.js',
+            'util': 'npm:util',
+            'bl': 'npm:bl/bl.js',
+            'inherits': 'npm:inherits/inherits.js',
+            'readable-stream': 'npm:readable-stream'
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
@@ -53,11 +65,21 @@
             },
             rxjs: {
                 defaultExtension: 'js'
-            },
-            'angular-in-memory-web-api': {
+            }/*,
+            '@aspnet/signalr-client': {
                 main: './index.js',
                 defaultExtension: 'js'
-            }
+            },
+            util: {
+                main: './util.js',
+                defaultExtension: 'js'
+            },
+            'readable-stream': {
+                defaultExtension: 'js',
+                map: {
+                    'stream': 'npm:stream/index.js'
+                }
+            }*/
         }
     });
 })(this);

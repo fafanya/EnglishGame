@@ -1,7 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from "./services/auth.service";
-import { SignalrService } from "./services/signal.service";
 import { GameService } from "./game.service";
 import { USubject } from './usubject';
 
@@ -19,7 +18,6 @@ export class AccountComponent implements OnInit {
 
     constructor(
         private authService: AuthService,
-        private signalrService: SignalrService,
         private gameService: GameService,
         private router: Router){}
 
