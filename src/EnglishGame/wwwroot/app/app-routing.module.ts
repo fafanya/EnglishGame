@@ -13,11 +13,12 @@ import { DuelsComponent } from './game/duels.component';
 
 import { RHomeComponent } from './signalr/rhome.component';
 import { AdminComponent } from './admin/admin.component';
+import { WorkbookComponent } from './workbook/workbook.component';
 
 const routes: Routes = [
     {
         path: '',
-        redirectTo: '/game',
+        redirectTo: '/workbook',
         pathMatch: 'full'
     },
     {
@@ -63,6 +64,10 @@ const routes: Routes = [
     {
         path: 'admin',
         component: AdminComponent
+    },
+    {
+        path: 'workbook',
+        component: WorkbookComponent
     }
 ];
 

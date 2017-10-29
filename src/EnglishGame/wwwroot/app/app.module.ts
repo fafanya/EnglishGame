@@ -34,6 +34,8 @@ import { ChatComponent } from './signalr/chat.component';
 
 import { AdminComponent } from './admin/admin.component';
 
+import { WorkbookModule } from './workbook/workbook.module';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -41,7 +43,8 @@ import { AdminComponent } from './admin/admin.component';
         HttpModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        MaterialModule
+        MaterialModule,
+        WorkbookModule
     ],
     declarations:
     [

@@ -19,7 +19,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\app\workbook\models\uexercise.ts" />
+    <Content Remove="wwwroot\app\workbook\models\uexerciseinstance.ts" />
+    <Content Remove="wwwroot\app\workbook\models\uexercisemark.ts" />
+    <Content Remove="wwwroot\app\workbook\models\umark.ts" />
+    <Content Remove="wwwroot\app\workbook\models\upupil.ts" />
     <Content Remove="wwwroot\app\workbook\models\utask.ts" />
+    <Content Remove="wwwroot\app\workbook\models\utaskinstance.ts" />
+    <Content Remove="wwwroot\app\workbook\models\utaskmark.ts" />
+    <Content Remove="wwwroot\app\workbook\models\utasktype.ts" />
+    <Content Remove="wwwroot\app\workbook\models\uteacher.ts" />
+    <Content Remove="wwwroot\app\workbook\pupil-area.component.ts" />
+    <Content Remove="wwwroot\app\workbook\teacher-area.component.ts" />
+    <Content Remove="wwwroot\app\workbook\uexercise-detail.component.ts" />
+    <Content Remove="wwwroot\app\workbook\workbook.component.ts" />
+    <Content Remove="wwwroot\app\workbook\workbook.module.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -76,7 +90,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\app\workbook\models\uexercise.ts" />
+    <TypeScriptCompile Include="wwwroot\app\workbook\models\uexerciseinstance.ts" />
+    <TypeScriptCompile Include="wwwroot\app\workbook\models\uexercisemark.ts" />
+    <TypeScriptCompile Include="wwwroot\app\workbook\models\umark.ts" />
+    <TypeScriptCompile Include="wwwroot\app\workbook\models\upupil.ts" />
     <TypeScriptCompile Include="wwwroot\app\workbook\models\utask.ts" />
+    <TypeScriptCompile Include="wwwroot\app\workbook\models\utaskinstance.ts" />
+    <TypeScriptCompile Include="wwwroot\app\workbook\models\utaskmark.ts" />
+    <TypeScriptCompile Include="wwwroot\app\workbook\models\utasktype.ts" />
+    <TypeScriptCompile Include="wwwroot\app\workbook\models\uteacher.ts" />
+    <TypeScriptCompile Include="wwwroot\app\workbook\pupil-area.component.ts" />
+    <TypeScriptCompile Include="wwwroot\app\workbook\teacher-area.component.ts" />
+    <TypeScriptCompile Include="wwwroot\app\workbook\uexercise-detail.component.ts" />
+    <TypeScriptCompile Include="wwwroot\app\workbook\workbook.component.ts" />
+    <TypeScriptCompile Include="wwwroot\app\workbook\workbook.module.ts" />
   </ItemGroup>
 
 </Project>
