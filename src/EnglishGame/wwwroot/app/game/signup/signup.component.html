@@ -1,23 +1,23 @@
-﻿<md-grid-list cols="3" rowHeight="100px">
-    <md-grid-tile colspan="3"></md-grid-tile>
-    <md-grid-tile rowspan="3"></md-grid-tile>
-    <md-grid-tile rowspan="3">
+﻿<mat-grid-list cols="3" rowHeight="100px">
+    <mat-grid-tile colspan="3"></mat-grid-tile>
+    <mat-grid-tile rowspan="3"></mat-grid-tile>
+    <mat-grid-tile rowspan="3">
         <div>
             <div>
-                <md-input-container>
-                    <input mdInput type="email" [(ngModel)]="userName" placeholder="Email" />
-                </md-input-container>
+                <mat-input-container>
+                    <input matInput type="email" [(ngModel)]="userName" placeholder="Email" />
+                </mat-input-container>
             </div>
             <div>
-                <md-input-container>
-                    <input mdInput type="password" [(ngModel)]="password" placeholder="Password" />
-                </md-input-container>
+                <mat-input-container>
+                    <input matInput type="password" [(ngModel)]="password" placeholder="Password" />
+                </mat-input-container>
             </div>
             <div>
-                <button md-raised-button color="accent" (click)="signup()">Sign Up</button>
+                <button mat-raised-button color="accent" (click)="signup()">Sign Up</button>
             </div>
         </div>
-    </md-grid-tile>
-    <md-grid-tile rowspan="3"></md-grid-tile>
-    <md-grid-tile colspan="3"></md-grid-tile>
-</md-grid-list>
+    </mat-grid-tile>
+    <mat-grid-tile rowspan="3"></mat-grid-tile>
+    <mat-grid-tile colspan="3"></mat-grid-tile>
+</mat-grid-list>

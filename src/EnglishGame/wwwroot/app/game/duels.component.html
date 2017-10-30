@@ -1,36 +1,36 @@
-﻿<md-grid-list cols="1" rowHeight="100px">
-    <md-grid-tile>
+﻿<mat-grid-list cols="1" rowHeight="100px">
+    <mat-grid-tile>
         <h1>DUELS</h1>
-    </md-grid-tile>
-</md-grid-list>
-<md-grid-list cols="4" rowHeight="45px">
-    <md-grid-tile-header></md-grid-tile-header>
-    <md-grid-tile>
-        <button md-button (click)="newduel()" 
+    </mat-grid-tile>
+</mat-grid-list>
+<mat-grid-list cols="4" rowHeight="45px">
+    <mat-grid-tile-header></mat-grid-tile-header>
+    <mat-grid-tile>
+        <button mat-button (click)="newduel()" 
             style="background-color:pink;">
             New Duel
         </button>
-    </md-grid-tile>
-    <md-grid-tile colspan="2" [style.background]="'yellow'">
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2" [style.background]="'yellow'">
         <div [innerHTML]=info></div>
-    </md-grid-tile>
-    <md-grid-tile></md-grid-tile>
-    <md-grid-tile *ngIf="duels" [rowspan]="duels.length">
+    </mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile *ngIf="duels" [rowspan]="duels.length">
         <div>
             <div *ngFor="let duel of duels" style="margin: 10px">
-                <button md-button 
+                <button mat-button 
                 style="background-color:lightgreen;min-width:200px"
                  color="primary" (click)="onSelect(duel)">
                     {{duel.Summary}}
                 </button>
             </div>
         </div>
-    </md-grid-tile>
-    <md-grid-tile colspan="2" [style.background]="'lightyellow'"
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2" [style.background]="'lightyellow'"
          *ngIf="duels" [rowspan]="10">
         <div class="container">
             <round *ngIf="selectedRound && selectedDuel" [round]="selectedRound" [duel]="selectedDuel"></round>
         </div>
-    </md-grid-tile>
-    <md-grid-tile></md-grid-tile>
-</md-grid-list>
+    </mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+</mat-grid-list>

@@ -3,7 +3,7 @@
         <div class="col-md-4"></div>
         <div class="col-md-4"></div>
         <div class="col-md-4 text-center">
-            <md-progress-spinner [value]="countdown"></md-progress-spinner>
+            <mat-progress-spinner [value]="countdown"></mat-progress-spinner>
         </div>
     </div>
     <div class="row">
@@ -17,13 +17,13 @@
     </div>
     <div class="row">
         <div class="col-md-4 text-center">
-            <button md-button (click)="leftChoice()">
+            <button mat-button (click)="leftChoice()">
                 {{round.LeftVariant}}
             </button>
         </div>
         <div class="col-md-4"></div>
         <div class="col-md-4 text-center">
-            <button md-button (click)="rightChoice()">
+            <button mat-button (click)="rightChoice()">
                 {{round.RightVariant}}
             </button>
         </div>

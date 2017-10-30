@@ -1,9 +1,9 @@
-﻿import { NgModule }      from '@angular/core';
+﻿import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatGridListModule, MatProgressSpinnerModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { IssueDetailComponent } from './issue-detail.component';
@@ -23,7 +23,7 @@ import { SignupComponent } from './game/signup/signup.component';
 
 import 'hammerjs';
 
-import { AppRoutingModule }     from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 
 import { ConfigService } from './signalr/config.service';
 import { DataService } from './signalr/data.service';
@@ -43,7 +43,7 @@ import { WorkbookModule } from './workbook/workbook.module';
         HttpModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        MaterialModule,
+        MatGridListModule, MatProgressSpinnerModule,
         WorkbookModule
     ],
     declarations:

@@ -31,7 +31,6 @@
     <Content Remove="wwwroot\app\workbook\models\uteacher.ts" />
     <Content Remove="wwwroot\app\workbook\pupil-area.component.ts" />
     <Content Remove="wwwroot\app\workbook\teacher-area.component.ts" />
-    <Content Remove="wwwroot\app\workbook\uexercise-detail.component.ts" />
     <Content Remove="wwwroot\app\workbook\workbook.component.ts" />
     <Content Remove="wwwroot\app\workbook\workbook.module.ts" />
   </ItemGroup>
@@ -102,7 +101,7 @@
     <TypeScriptCompile Include="wwwroot\app\workbook\models\uteacher.ts" />
     <TypeScriptCompile Include="wwwroot\app\workbook\pupil-area.component.ts" />
     <TypeScriptCompile Include="wwwroot\app\workbook\teacher-area.component.ts" />
-    <TypeScriptCompile Include="wwwroot\app\workbook\uexercise-detail.component.ts" />
+    <TypeScriptCompile Include="wwwroot\app\workbook\exercise-detail.component.ts" />
     <TypeScriptCompile Include="wwwroot\app\workbook\workbook.component.ts" />
     <TypeScriptCompile Include="wwwroot\app\workbook\workbook.module.ts" />
   </ItemGroup>

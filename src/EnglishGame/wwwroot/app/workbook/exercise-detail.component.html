@@ -1,0 +1,35 @@
+﻿<mat-grid-list cols="1" rowHeight="100px">
+    <mat-grid-tile>
+        <h1>NEW EXERCISE</h1>
+    </mat-grid-tile>
+</mat-grid-list>
+<mat-grid-list cols="7" rowHeight="250px">
+    <mat-grid-tile-header></mat-grid-tile-header>
+
+    <mat-grid-tile>
+        <mat-list>
+            <mat-list-item>
+                <button mat-raised-button style="margin: 10px" (click)="onSelectTasks()">
+                    Tasks
+                </button>
+            </mat-list-item>
+            <mat-list-item>
+                <button mat-raised-button style="margin: 10px" (click)="onSelectPupils()">
+                    Pupils
+                </button>
+            </mat-list-item>
+            <mat-list-item>
+                <button mat-raised-button style="margin: 10px" (click)="onSelectSchedule()">
+                    Schedule
+                </button>
+            </mat-list-item>
+        </mat-list>
+    </mat-grid-tile>
+    <mat-grid-tile>
+
+    </mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+
+    <mat-grid-tile colspan="3"></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+</mat-grid-list>

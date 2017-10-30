@@ -1,17 +1,17 @@
-<md-grid-list cols="3" *ngIf="isLogin">
-    <md-grid-tile-header>
-        <button md-button style="margin: 10px" (click)="signout()">
+<mat-grid-list cols="3" *ngIf="isLogin">
+    <mat-grid-tile-header>
+        <button mat-button style="margin: 10px" (click)="signout()">
             Sign Out
         </button>
-    </md-grid-tile-header>
-</md-grid-list>
-<md-grid-list cols="3" *ngIf="isLogin" rowHeight="50px">
-    <md-grid-tile colspan="3">
+    </mat-grid-tile-header>
+</mat-grid-list>
+<mat-grid-list cols="3" *ngIf="isLogin" rowHeight="50px">
+    <mat-grid-tile colspan="3">
         <h1 style="margin: 10px">{{userName}}</h1>
-    </md-grid-tile>
-    <md-grid-tile *ngIf="usubjects">
-        <button md-button [routerLink]="['/duels', usubject.Id]" *ngFor="let usubject of usubjects">
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="usubjects">
+        <button mat-button [routerLink]="['/duels', usubject.Id]" *ngFor="let usubject of usubjects">
             {{usubject.Name}}
         </button>
-    </md-grid-tile>
-</md-grid-list>
+    </mat-grid-tile>
+</mat-grid-list>

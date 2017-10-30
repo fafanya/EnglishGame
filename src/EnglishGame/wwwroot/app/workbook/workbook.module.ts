@@ -2,13 +2,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatGridListModule, MatListModule, MatProgressSpinnerModule } from '@angular/material';
 import 'hammerjs';
 
 import { WorkbookComponent } from './workbook.component';
 import { StartPageComponent } from './startpage.component';
 import { AppRoutingModule } from './app-routing.module';
+import { TeacherAreaComponent } from './teacher-area.component';
+import { PupilAreaComponent } from './pupil-area.component';
+import { ExerciseDetailComponent } from './exercise-detail.component';
 
 @NgModule({
     imports: [
@@ -17,12 +20,15 @@ import { AppRoutingModule } from './app-routing.module';
         HttpModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        MaterialModule
+        MatButtonModule, MatGridListModule, MatListModule, MatProgressSpinnerModule
     ],
     declarations:
     [
         WorkbookComponent,
-        StartPageComponent
+        StartPageComponent,
+        TeacherAreaComponent,
+        PupilAreaComponent,
+        ExerciseDetailComponent
     ]
 })
 export class WorkbookModule { }
