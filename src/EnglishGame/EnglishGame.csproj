@@ -24,6 +24,7 @@
     <Content Remove="wwwroot\app\workbook\models\uexercisemark.ts" />
     <Content Remove="wwwroot\app\workbook\models\umark.ts" />
     <Content Remove="wwwroot\app\workbook\models\upupil.ts" />
+    <Content Remove="wwwroot\app\workbook\models\uscheduleitem.ts" />
     <Content Remove="wwwroot\app\workbook\models\utask.ts" />
     <Content Remove="wwwroot\app\workbook\models\utaskinstance.ts" />
     <Content Remove="wwwroot\app\workbook\models\utaskmark.ts" />
@@ -94,6 +95,7 @@
     <TypeScriptCompile Include="wwwroot\app\workbook\models\uexercisemark.ts" />
     <TypeScriptCompile Include="wwwroot\app\workbook\models\umark.ts" />
     <TypeScriptCompile Include="wwwroot\app\workbook\models\upupil.ts" />
+    <TypeScriptCompile Include="wwwroot\app\workbook\models\uscheduleitem.ts" />
     <TypeScriptCompile Include="wwwroot\app\workbook\models\utask.ts" />
     <TypeScriptCompile Include="wwwroot\app\workbook\models\utaskinstance.ts" />
     <TypeScriptCompile Include="wwwroot\app\workbook\models\utaskmark.ts" />

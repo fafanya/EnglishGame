@@ -3,10 +3,8 @@
         <h1>NEW EXERCISE</h1>
     </mat-grid-tile>
 </mat-grid-list>
-<mat-grid-list cols="7" rowHeight="250px">
-    <mat-grid-tile-header></mat-grid-tile-header>
-
-    <mat-grid-tile>
+<mat-grid-list cols="7" rowHeight="70px">
+    <mat-grid-tile [rowspan]="4">
         <mat-list>
             <mat-list-item>
                 <button mat-raised-button style="margin: 10px" (click)="onSelectTasks()">
@@ -23,13 +21,68 @@
                     Schedule
                 </button>
             </mat-list-item>
+            <mat-list-item>
+                <button mat-raised-button style="margin: 10px" (click)="onOK()">
+                    OK
+                </button>
+            </mat-list-item>
         </mat-list>
     </mat-grid-tile>
-    <mat-grid-tile>
 
+    <mat-grid-tile [rowspan]="tasks.length" *ngIf="selectTasks">
+        <mat-grid-tile-header>Select Tasks</mat-grid-tile-header>
+        <mat-selection-list>
+            <mat-list-option *ngFor="let task of tasks" (click)="onSelectTask(task)"
+                             selected="{{task.isSelected}}">
+                <span>{{task.name}}</span>
+            </mat-list-option>
+        </mat-selection-list>
     </mat-grid-tile>
+    <mat-grid-tile [rowspan]="pupils.length" *ngIf="selectPupils">
+        <mat-grid-tile-header>Select Pupils</mat-grid-tile-header>
+        <mat-selection-list>
+            <mat-list-option *ngFor="let pupil of pupils" (click)="onSelectPupil(pupil)"
+                             selected="{{pupil.isSelected}}">
+                <span>{{pupil.name}}</span>
+            </mat-list-option>
+        </mat-selection-list>
+    </mat-grid-tile>
+    <mat-grid-tile [rowspan]="schedule.length" *ngIf="selectSchedule">
+        <mat-grid-tile-header>Select Schedule</mat-grid-tile-header>
+        <mat-selection-list>
+            <mat-list-option *ngFor="let si of schedule" (click)="onSelectDate(si)"
+                                selected="{{si.isSelected}}">
+                <span>{{si.day | date}}</span>
+            </mat-list-option>
+        </mat-selection-list>
+    </mat-grid-tile>
+
     <mat-grid-tile></mat-grid-tile>
 
-    <mat-grid-tile colspan="3"></mat-grid-tile>
+    <mat-grid-tile [rowspan]="tasks.length">
+        <mat-grid-tile-header>Tasks List</mat-grid-tile-header>
+        <mat-list>
+            <mat-list-item *ngFor="let task of selectedTasks">
+                <span>{{task.name}}</span>
+            </mat-list-item>
+        </mat-list>
+    </mat-grid-tile>
+    <mat-grid-tile [rowspan]="pupils.length">
+        <mat-grid-tile-header>Pupils List</mat-grid-tile-header>
+        <mat-list>
+            <mat-list-item *ngFor="let pupil of selectedPupils">
+                <span>{{pupil.name}}</span>
+            </mat-list-item>
+        </mat-list>
+    </mat-grid-tile>
+    <mat-grid-tile [rowspan]="schedule.length">
+        <mat-grid-tile-header>Schedule List</mat-grid-tile-header>
+        <mat-list>
+            <mat-list-item *ngFor="let si of selectedSchedule">
+                <span>{{si.day | date}}</span>
+            </mat-list-item>
+        </mat-list>
+    </mat-grid-tile>
+
     <mat-grid-tile></mat-grid-tile>
 </mat-grid-list>
