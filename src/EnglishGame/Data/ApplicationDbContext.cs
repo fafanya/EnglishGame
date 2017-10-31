@@ -6,6 +6,7 @@ using EnglishGame.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using EnglishGame.Controllers;
 using Microsoft.AspNetCore.Identity;
+using EnglishGame.Models.Workbook;
 
 namespace EnglishGame.Data
 {
@@ -18,6 +19,7 @@ namespace EnglishGame.Data
         public DbSet<URound> URounds { get; set; }
         public DbSet<UWeight> UWeights { get; set; }
         public DbSet<USubject> USubjects { get; set; }
+        public DbSet<UExercise> UExercises { get; set; }
         //public DbSet<UEventType> UEventTypes { get; set; }
         
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -88,6 +90,33 @@ namespace EnglishGame.Data
                     }
                 }
                 catch(Exception ex)
+                {
+                    var e = ex;
+                }
+            }
+        }
+
+
+        private static void CreateWorkbookData(IServiceProvider serviceProvider)
+        {
+            using (var context = serviceProvider.GetService<ApplicationDbContext>())
+            {
+                try
+                {
+                    if (context.UExercises != null)
+                    {
+                        if (!context.UExercises.Any())
+                        {
+                            UExercise uExercise = new UExercise()
+                            {
+                                Name = "Exercise 1"
+                            };
+                            context.UExercises.Add(uExercise);
+                            context.SaveChanges();
+                        }
+                    }
+                }
+                catch (Exception ex)
                 {
                     var e = ex;
                 }

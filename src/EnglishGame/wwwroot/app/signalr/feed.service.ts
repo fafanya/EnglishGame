@@ -77,7 +77,6 @@ export class FeedService {
             console.log('connection closed');
         };
 
-
         /*$.connection.hub.logging = debug;
         
         let connection = <FeedSignalR>$.connection;
