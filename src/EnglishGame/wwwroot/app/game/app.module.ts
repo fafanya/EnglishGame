@@ -6,20 +6,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatGridListModule, MatProgressSpinnerModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
-import { IssueDetailComponent } from './issue-detail.component';
-import { IssuesComponent } from './issues.component';
-import { DashboardComponent } from './dashboard.component';
-import { IssueService } from './issue.service';
 
-import { GameComponent } from './game/game.component';
-import { AccountComponent } from './game/account.component';
-import { RoundDetailComponent } from './game/round-detail.component';
-import { DuelsComponent } from './game/duels.component';
-import { GameService } from './game/game.service';
+import { GameComponent } from './game.component';
+import { AccountComponent } from './account.component';
+import { RoundDetailComponent } from './round-detail.component';
+import { DuelsComponent } from './duels.component';
+import { GameService } from './game.service';
 
-import { AuthService } from './game/services/auth.service';
-import { SigninComponent } from './game/signin/signin.component';
-import { SignupComponent } from './game/signup/signup.component';
+import { AuthService } from './services/auth.service';
+import { SigninComponent } from './signin/signin.component';
+import { SignupComponent } from './signup/signup.component';
 
 import 'hammerjs';
 
@@ -32,9 +28,7 @@ import { HighlightDirective } from './signalr/highlight.directive';
 import { MatchComponent } from './signalr/match.component';
 import { ChatComponent } from './signalr/chat.component';
 
-import { AdminComponent } from './admin/admin.component';
-
-import { WorkbookModule } from './workbook/workbook.module';
+//import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
     imports: [
@@ -43,15 +37,11 @@ import { WorkbookModule } from './workbook/workbook.module';
         HttpModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        MatGridListModule, MatProgressSpinnerModule,
-        WorkbookModule
+        MatGridListModule, MatProgressSpinnerModule
     ],
     declarations:
     [
         AppComponent,
-        IssueDetailComponent,
-        IssuesComponent,
-        DashboardComponent,
         GameComponent,
         AccountComponent,
         RoundDetailComponent,
@@ -61,11 +51,10 @@ import { WorkbookModule } from './workbook/workbook.module';
         RHomeComponent,
         HighlightDirective,
         MatchComponent,
-        DuelsComponent,
-        AdminComponent
+        DuelsComponent
+        //AdminComponent
     ],
     providers: [
-        IssueService,
         AuthService,
         ConfigService,
         DataService,

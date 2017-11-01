@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 export class PupilAreaComponent implements OnInit {
     isLogin = false;
 
+    private exerciseAmount: number;
+
     constructor(
         private router: Router
     ) { }

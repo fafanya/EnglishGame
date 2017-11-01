@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 
 @Component({
     moduleId: module.id,
-    templateUrl: './workbook.component.html'
+    selector: 'my-app',
+    templateUrl: './app.component.html'
 })
-export class WorkbookComponent {
+export class AppComponent {
     constructor(
         private router: Router
     ) { }

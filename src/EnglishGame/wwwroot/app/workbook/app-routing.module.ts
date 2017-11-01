@@ -1,6 +1,6 @@
 ﻿import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { WorkbookComponent } from './workbook.component';
+import { AppComponent } from './app.component';
 import { StartPageComponent } from './startpage.component';
 import { TeacherAreaComponent } from './teacher-area.component';
 import { PupilAreaComponent } from './pupil-area.component';

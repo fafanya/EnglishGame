@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import { Observable, Subscription } from 'rxjs/Rx';
 
 import { GameService } from './game.service';
-import { FeedService } from "../signalr/feed.service";
+import { FeedService } from './signalr/feed.service';
 
 import { URound } from './uround';
 import { UDuel } from './uduel';

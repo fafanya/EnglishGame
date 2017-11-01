@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatGridListModule, MatListModule, MatProgressSpinnerModule } from '@angular/material';
 import 'hammerjs';
 
-import { WorkbookComponent } from './workbook.component';
+import { AppComponent } from './app.component';
 import { StartPageComponent } from './startpage.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TeacherAreaComponent } from './teacher-area.component';
@@ -24,11 +24,12 @@ import { ExerciseDetailComponent } from './exercise-detail.component';
     ],
     declarations:
     [
-        WorkbookComponent,
+        AppComponent,
         StartPageComponent,
         TeacherAreaComponent,
         PupilAreaComponent,
         ExerciseDetailComponent
-    ]
+    ],
+    bootstrap: [AppComponent]
 })
-export class WorkbookModule { }
+export class AppModule { }

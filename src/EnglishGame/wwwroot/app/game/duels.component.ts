@@ -4,10 +4,10 @@ import { UDuel } from './uduel';
 import { URound } from './uround';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
-import { AuthService } from "./services/auth.service";
+import { AuthService } from './services/auth.service';
 import { GameService } from './game.service';
 import { RequestResult } from './models/request-result';
-import { FeedService } from "../signalr/feed.service";
+import { FeedService } from './signalr/feed.service';
 
 @Component({
     moduleId: module.id,
