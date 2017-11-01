@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { UDuel } from './uduel';
-import { URound } from './uround';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
+import { UDuel } from './models/uduel';
+import { URound } from './models/uround';
+
 import { AuthService } from './services/auth.service';
-import { GameService } from './game.service';
+import { GameService } from './services/game.service';
 import { RequestResult } from './models/request-result';
-import { FeedService } from './signalr/feed.service';
+import { SignalRService } from './services/signalr.service';
 
 @Component({
     moduleId: module.id,
@@ -29,7 +30,7 @@ export class DuelsComponent implements OnInit {
         private authService: AuthService,
         private router: ActivatedRoute,
         private gameService: GameService,
-        private signalrService: FeedService,
+        private signalrService: SignalRService,
         private sanitizer: DomSanitizer
     ) { }
 

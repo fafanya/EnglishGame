@@ -3,11 +3,11 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Observable, Subscription } from 'rxjs/Rx';
 
-import { GameService } from './game.service';
-import { FeedService } from './signalr/feed.service';
+import { GameService } from './services/game.service';
+import { SignalRService } from './services/signalr.service';
 
-import { URound } from './uround';
-import { UDuel } from './uduel';
+import { URound } from './models/uround';
+import { UDuel } from './models/uduel';
 
 @Component({
     moduleId: module.id,
@@ -37,7 +37,7 @@ export class RoundDetailComponent {
         private route: ActivatedRoute,
         private location: Location,
         private gameService: GameService,
-        private signalrService: FeedService,
+        private signalrService: SignalRService,
         private router: Router)
     {
     }

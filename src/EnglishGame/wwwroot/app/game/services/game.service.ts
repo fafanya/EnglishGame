@@ -1,15 +1,14 @@
-﻿import { URound } from './uround';
-import { UDuel } from './uduel';
-import { USubject } from './usubject';
-import { Headers, Http, Response, RequestOptions, URLSearchParams } from '@angular/http';
+﻿import { Headers, Http, Response, RequestOptions, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
-
-import { AuthService } from './services/auth.service';
-
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
+
+import { AuthService } from './auth.service';
+import { URound } from '../models/uround';
+import { UDuel } from '../models/uduel';
+import { USubject } from '../models/usubject';
 
 @Injectable()
 export class GameService {

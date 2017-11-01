@@ -1,8 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from "./services/auth.service";
-import { GameService } from "./game.service";
-import { USubject } from './usubject';
+import { AuthService } from './services/auth.service';
+import { GameService } from './services/game.service';
+import { USubject } from './models/usubject';
 
 @Component({
     moduleId: module.id,

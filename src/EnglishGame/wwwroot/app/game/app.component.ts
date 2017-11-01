@@ -1,17 +1,16 @@
 ﻿import { Component, OnInit } from '@angular/core';
 
-import { FeedService } from './signalr/feed.service';
-import { SignalRConnectionStatus } from './signalr/interfaces';
+import { SignalRService } from './services/signalr.service';
 
 @Component({
     moduleId: module.id,
     selector: 'my-app',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    providers: [FeedService]
+    providers: [SignalRService]
 })
 export class AppComponent {
-    constructor(private service: FeedService) { }
+    constructor(private service: SignalRService) { }
 
     ngOnInit() {
         this.service.start(true).subscribe(

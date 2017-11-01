@@ -8,8 +8,6 @@ import { SignupComponent } from './signup/signup.component';
 import { RoundDetailComponent } from './round-detail.component';
 import { DuelsComponent } from './duels.component';
 
-import { RHomeComponent } from './signalr/rhome.component';
-
 const routes: Routes = [
     {
         path: '',
@@ -31,10 +29,6 @@ const routes: Routes = [
     {
         path: "signup",
         component: SignupComponent
-    },
-    {
-        path: 'rhome',
-        component: RHomeComponent
     },
     {
         path: 'round/:id',
