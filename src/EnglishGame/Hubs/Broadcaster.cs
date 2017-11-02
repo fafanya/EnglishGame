@@ -5,7 +5,7 @@ using System;
 
 namespace EnglishGame.Hubs
 {
-    public class Broadcastert : Hub<IBroadcaster>
+    public class Broadcaster : Hub<IBroadcaster>
     {
         public override Task OnConnectedAsync()
         {
@@ -30,9 +30,6 @@ namespace EnglishGame.Hubs
     {
         Task Send(string message);
         Task SetConnectionId(string connectionId);
-        Task UpdateMatch(MatchViewModel match);
-        Task AddFeed(FeedViewModel feed);
-        Task AddChatMessage(ChatMessage message);
         Task MessageReceived(string msg);
     }
 }

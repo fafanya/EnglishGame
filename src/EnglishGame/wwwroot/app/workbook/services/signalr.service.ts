@@ -29,7 +29,7 @@ export class SignalRService {
         var transportType = TransportType.WebSockets;
 
         var logger = new ConsoleLogger(LogLevel.Information);
-        var chatHub = new HttpConnection('http://localhost:5000/broadcastert',
+        var chatHub = new HttpConnection('http://localhost:5000/broadcaster',
             { transport: transportType});
         this.chatConnection = new HubConnection(chatHub, logger);
 

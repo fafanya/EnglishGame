@@ -21,12 +21,7 @@ using Microsoft.EntityFrameworkCore;
 using EnglishGame.Data;
 using Microsoft.AspNetCore.Identity;
 
-using EnglishGame.Data.Repositories;
-using EnglishGame.Data.Abstract;
-using EnglishGame.Core.Mappings;
 using Newtonsoft.Json.Serialization;
-using RecurrentTasks;
-using EnglishGame.Core;
 using EnglishGame.Hubs;
 
 namespace EnglishGame
@@ -113,15 +108,6 @@ namespace EnglishGame
                 };
             });
 
-            //----------------------------
-            services.AddDbContext<LiveGameContext>(options => options.UseInMemoryDatabase());
-            // Repositories
-            services.AddScoped<IMatchRepository, MatchRepository>();
-            services.AddScoped<IFeedRepository, FeedRepository>();
-
-            // Automapper Configuration
-            AutoMapperConfiguration.Configure();
-
             // Add framework services.
             services
                 .AddMvc()
@@ -129,8 +115,6 @@ namespace EnglishGame
                     new DefaultContractResolver());
 
             services.AddSignalR();
-
-            services.AddTask<FeedEngine>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
@@ -200,13 +184,8 @@ namespace EnglishGame
             app.UseStaticFiles();
             app.UseMvc(routes => { });
             app.UseSignalR(routes => {
-                routes.MapHub<Broadcastert>("broadcastert");
+                routes.MapHub<Broadcaster>("broadcaster");
             });
-
-
-            LiveGameDbInitializer.Initialize(app.ApplicationServices);
-
-            app.StartTask<FeedEngine>(TimeSpan.FromSeconds(15));
 
             ApplicationDbContext.Initialize(app.ApplicationServices);
 

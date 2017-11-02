@@ -26,13 +26,13 @@ namespace EnglishGame.Controllers
         private readonly ApplicationDbContext m_Context;
         private readonly UserManager<UUser> m_UserManager;
         private readonly SignInManager<UUser> m_SignInManager;
-        private readonly IHubContext<Broadcastert> m_HubContext;
+        private readonly IHubContext<Broadcaster> m_HubContext;
 
         public WorkbookController(
             ApplicationDbContext context,
             UserManager<UUser> userManager,
             SignInManager<UUser> signInManager,
-            IHubContext<Broadcastert> hubContext)
+            IHubContext<Broadcaster> hubContext)
         {
             m_Context = context;
             m_UserManager = userManager;
