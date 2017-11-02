@@ -11,7 +11,7 @@ import { DuelsComponent } from './duels.component';
 const routes: Routes = [
     {
         path: '',
-        redirectTo: '/workbook',
+        redirectTo: '/game',
         pathMatch: 'full'
     },
     {

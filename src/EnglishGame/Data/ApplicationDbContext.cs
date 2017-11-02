@@ -19,7 +19,7 @@ namespace EnglishGame.Data
         public DbSet<URound> URounds { get; set; }
         public DbSet<UWeight> UWeights { get; set; }
         public DbSet<USubject> USubjects { get; set; }
-        public DbSet<UExercise> UExercises { get; set; }
+        //public DbSet<UExercise> UExercises { get; set; }
         //public DbSet<UEventType> UEventTypes { get; set; }
         
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -97,7 +97,7 @@ namespace EnglishGame.Data
         }
 
 
-        private static void CreateWorkbookData(IServiceProvider serviceProvider)
+        /*private static void CreateWorkbookData(IServiceProvider serviceProvider)
         {
             using (var context = serviceProvider.GetService<ApplicationDbContext>())
             {
@@ -121,6 +121,6 @@ namespace EnglishGame.Data
                     var e = ex;
                 }
             }
-        }
+        }*/
     }
 }

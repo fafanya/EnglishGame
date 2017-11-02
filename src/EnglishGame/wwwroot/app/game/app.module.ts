@@ -3,7 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatGridListModule, MatProgressSpinnerModule } from '@angular/material';
+import {
+    MatButtonModule, MatGridListModule, MatListModule,
+    MatProgressSpinnerModule, MatInputModule
+} from '@angular/material';
+import 'hammerjs';
 
 import { AppComponent } from './app.component';
 
@@ -17,8 +21,6 @@ import { AuthService } from './services/auth.service';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 
-import 'hammerjs';
-
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
@@ -28,7 +30,8 @@ import { AppRoutingModule } from './app-routing.module';
         HttpModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        MatGridListModule, MatProgressSpinnerModule
+        MatButtonModule, MatGridListModule,
+        MatListModule, MatProgressSpinnerModule, MatInputModule
     ],
     declarations:
     [

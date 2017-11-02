@@ -41,7 +41,7 @@ namespace EnglishGame.Controllers
         }
 
         //[Authorize("Bearer")]
-        [HttpPost("PostExercise")]
+        /*[HttpPost("PostExercise")]
         public async Task<IActionResult> PostExercise([FromBody] UExercise exercise)
         {
             string msg = String.Empty;
@@ -69,6 +69,6 @@ namespace EnglishGame.Controllers
                 Msg = msg
             });
             return Ok(result);
-        }
+        }*/
     }
 }

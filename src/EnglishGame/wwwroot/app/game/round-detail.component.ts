@@ -23,8 +23,10 @@ export class RoundDetailComponent {
     set round(round: URound)
     {
         this._round = round;
-        let timer = Observable.timer(100, 1000);
-        this._subscription = timer.subscribe(t => this.setCountdown(t));
+        if (this._round != null) {
+            let timer = Observable.timer(100, 1000);
+            this._subscription = timer.subscribe(t => this.setCountdown(t));
+        }
     }
     get round() : URound 
     {
