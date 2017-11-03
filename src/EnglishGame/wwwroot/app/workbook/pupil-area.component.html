@@ -1,7 +1,11 @@
 ﻿<mat-grid-list cols="3">
     <mat-grid-tile></mat-grid-tile>
     <mat-grid-tile>
-
+        <mat-list>
+            <mat-list-item *ngFor="let ex of exercises">
+                <span>{{ex.name}}</span>
+            </mat-list-item>
+        </mat-list>
     </mat-grid-tile>
     <mat-grid-tile></mat-grid-tile>
 </mat-grid-list>
