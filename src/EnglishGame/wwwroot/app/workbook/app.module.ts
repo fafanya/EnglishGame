@@ -13,6 +13,8 @@ import { TeacherAreaComponent } from './teacher-area.component';
 import { PupilAreaComponent } from './pupil-area.component';
 import { ExerciseDetailComponent } from './exercise-detail.component';
 
+import { WorkbookService } from './services/workbook.service';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -29,6 +31,10 @@ import { ExerciseDetailComponent } from './exercise-detail.component';
         TeacherAreaComponent,
         PupilAreaComponent,
         ExerciseDetailComponent
+    ],
+    providers:
+    [
+        WorkbookService
     ],
     bootstrap: [AppComponent]
 })

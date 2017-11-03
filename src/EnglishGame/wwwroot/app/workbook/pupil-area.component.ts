@@ -2,6 +2,8 @@
 import { Router } from '@angular/router';
 import { UExercise } from './models/uexercise';
 
+import { WorkbookService } from './services/workbook.service';
+
 @Component({
     moduleId: module.id,
     selector: 'pupil',
@@ -12,16 +14,16 @@ export class PupilAreaComponent implements OnInit {
 
     private exerciseAmount: number;
 
-    exercises: UExercise[] = [
-        {
-            id: 1, name: 'Exercise 1', teacher_id: 1, taskList: null,
-            pupilList: null, scheduleItemList: null, teacher: null
-        }
-    ];
+    exercises: UExercise[] = [];
 
     constructor(
-        private router: Router
-    ) { }
+        private router: Router,
+        private workbookService: WorkbookService
+    ) {
+        workbookService.getExerciseList().then(exercises => {
+            this.exercises = exercises;
+        });
+    }
 
     ngOnInit(): void {
     }

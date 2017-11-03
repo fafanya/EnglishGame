@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\app\workbook\mockup\mockup.ts" />
     <Content Remove="wwwroot\app\workbook\models\uexercise.ts" />
     <Content Remove="wwwroot\app\workbook\models\uexerciseinstance.ts" />
     <Content Remove="wwwroot\app\workbook\models\uexercisemark.ts" />
@@ -88,6 +89,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\app\workbook\mockup\mockup.ts" />
     <TypeScriptCompile Include="wwwroot\app\workbook\models\uexercise.ts" />
     <TypeScriptCompile Include="wwwroot\app\workbook\models\uexerciseinstance.ts" />
     <TypeScriptCompile Include="wwwroot\app\workbook\models\uexercisemark.ts" />
