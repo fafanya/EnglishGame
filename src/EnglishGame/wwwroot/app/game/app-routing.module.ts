@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { GameComponent } from './game.component';
 import { AccountComponent } from './account.component';
 
-import { SigninComponent } from './signin/signin.component';
-import { SignupComponent } from './signup/signup.component';
+import { SigninComponent } from '../_common/signin/signin.component';
+import { SignupComponent } from '../_common/signup/signup.component';
 import { RoundDetailComponent } from './round-detail.component';
 import { DuelsComponent } from './duels.component';
 

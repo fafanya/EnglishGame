@@ -2,7 +2,7 @@
 import { Headers, Http } from "@angular/http";
 import "rxjs/add/operator/toPromise";
 
-import { RequestResult } from "../models/request-result";
+import { RequestResult } from "./request-result";
 
 @Injectable()
 export class AuthService {

@@ -5,9 +5,9 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { UDuel } from './models/uduel';
 import { URound } from './models/uround';
 
-import { AuthService } from './services/auth.service';
+import { AuthService } from '../_common/auth/auth.service';
 import { GameService } from './services/game.service';
-import { RequestResult } from './models/request-result';
+//import { RequestResult } from './models/request-result';
 import { SignalRService } from './services/signalr.service';
 
 @Component({

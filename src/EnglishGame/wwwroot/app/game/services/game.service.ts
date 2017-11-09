@@ -5,7 +5,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
-import { AuthService } from './auth.service';
+import { AuthService } from '../../_common/auth/auth.service';
 import { URound } from '../models/uround';
 import { UDuel } from '../models/uduel';
 import { USubject } from '../models/usubject';

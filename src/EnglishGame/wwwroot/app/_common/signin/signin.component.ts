@@ -1,15 +1,15 @@
 ﻿import { Component } from "@angular/core";
 import { Router } from '@angular/router';
 
-import { AuthService } from "../services/auth.service";
+import { AuthService } from "../../_common/auth/auth.service";
 
 @Component({
     moduleId: module.id,
-    selector: "signup",
-    templateUrl: "./signup.component.html",
-    styleUrls: ["./signup.component.css"]
+    selector: "signin",
+    templateUrl: "./signin.component.html",
+    styleUrls: ["./signin.component.css"]
 })
-export class SignupComponent {
+export class SigninComponent {
 
     private userName: string;
     private password: string;
@@ -17,10 +17,10 @@ export class SignupComponent {
     constructor(
         private authService: AuthService,
         private router: Router
-    ) { }
+    ) { } 
 
-    signup() {
-        this.authService.signup(this.userName, this.password)
+    signin() {
+        this.authService.login(this.userName, this.password)
             .then(result => {
                 if (result.State == 1) {
                     this.router.navigate(["./account"]);

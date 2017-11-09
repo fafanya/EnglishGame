@@ -17,9 +17,9 @@ import { RoundDetailComponent } from './round-detail.component';
 import { DuelsComponent } from './duels.component';
 import { GameService } from './services/game.service';
 
-import { AuthService } from './services/auth.service';
-import { SigninComponent } from './signin/signin.component';
-import { SignupComponent } from './signup/signup.component';
+import { AuthService } from '../_common/auth/auth.service';
+import { SigninComponent } from '../_common/signin/signin.component';
+import { SignupComponent } from '../_common/signup/signup.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
