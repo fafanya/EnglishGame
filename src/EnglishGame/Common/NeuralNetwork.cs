@@ -58,6 +58,7 @@ namespace EnglishGame.Common
             }
             return preOutput;
         }
+
         private int[] GetPostOutput(double[] preOutput)
         {
             int all = 10;
