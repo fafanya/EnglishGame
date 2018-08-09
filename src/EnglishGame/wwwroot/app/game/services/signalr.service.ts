@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { HubConnection, HubConnectionBuilder } from "@aspnet/signalr";
-import 'rxjs/add/operator/toPromise';
 import { Observable, Subject } from "rxjs";
 import { SignalRConnectionStatus } from '../../_common/signalr/interfaces';
 
