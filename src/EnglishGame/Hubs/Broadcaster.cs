@@ -16,12 +16,12 @@ namespace EnglishGame.Hubs
         // Server side methods called from client
         public Task Subscribe(int matchId)
         {
-            return Groups.AddAsync(Context.ConnectionId, matchId.ToString());
+            return Groups.AddToGroupAsync(Context.ConnectionId, matchId.ToString());
         }
 
         public Task Unsubscribe(int matchId)
         {
-            return Groups.RemoveAsync(Context.ConnectionId, matchId.ToString());
+            return Groups.RemoveFromGroupAsync(Context.ConnectionId, matchId.ToString());
         }
     }
 

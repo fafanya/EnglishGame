@@ -26,11 +26,8 @@
             </div>
         </div>
     </mat-grid-tile>
-    <mat-grid-tile colspan="2" [style.background]="'lightyellow'"
-         *ngIf="duels" [rowspan]="10">
-        <div class="container">
-            <round *ngIf="selectedRound && selectedDuel" [round]="selectedRound" [duel]="selectedDuel"></round>
-        </div>
+    <mat-grid-tile colspan="2" [style.background]="'lightyellow'" *ngIf="duels" [rowspan]="10">
+        <round *ngIf="selectedRound && selectedDuel" [round]="selectedRound" [duel]="selectedDuel"></round>
     </mat-grid-tile>
     <mat-grid-tile></mat-grid-tile>
 </mat-grid-list>

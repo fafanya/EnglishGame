@@ -184,7 +184,7 @@ namespace EnglishGame
             app.UseStaticFiles();
             app.UseMvc(routes => { });
             app.UseSignalR(routes => {
-                routes.MapHub<Broadcaster>("broadcaster");
+                routes.MapHub<Broadcaster>("/broadcaster");
             });
 
             ApplicationDbContext.Initialize(app.ApplicationServices);

@@ -1,7 +1,7 @@
 ﻿import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { Observable, Subscription } from 'rxjs/Rx';
+import { Observable, Subscription, timer } from 'rxjs';
 
 import { GameService } from './services/game.service';
 import { SignalRService } from './services/signalr.service';
@@ -24,8 +24,8 @@ export class RoundDetailComponent {
     {
         this._round = round;
         if (this._round != null) {
-            let timer = Observable.timer(100, 1000);
-            this._subscription = timer.subscribe(t => this.setCountdown(t));
+            let roundTimer = timer(100, 1000);
+            this._subscription = roundTimer.subscribe(t => this.setCountdown(t));
         }
     }
     get round() : URound 

@@ -4,14 +4,14 @@
     <mat-grid-tile rowspan="3">
         <div>
             <div>
-                <mat-input-container>
+                <mat-form-field>
                     <input matInput type="email" [(ngModel)]="userName" placeholder="Email" />
-                </mat-input-container>
+                </mat-form-field>
             </div>
             <div>
-                <mat-input-container>
+                <mat-form-field>
                     <input matInput type="password" [(ngModel)]="password" placeholder="Password" />
-                </mat-input-container>
+                </mat-form-field>
             </div>
             <div>
                 <button mat-raised-button color="accent" (click)="signup()">Sign Up</button>

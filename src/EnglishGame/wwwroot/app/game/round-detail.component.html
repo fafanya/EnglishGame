@@ -1,31 +1,41 @@
-﻿<div class="container-fluid" *ngIf="round && duel">
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4"></div>
-        <div class="col-md-4 text-center">
-            <mat-progress-spinner [value]="countdown"></mat-progress-spinner>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4 text-center">
-            <div>
+﻿<mat-card style="width:400px; height:400px;">
+    <mat-card-content>
+        <mat-grid-list cols="5" *ngIf="round && duel">
+            <mat-grid-tile></mat-grid-tile>
+            <mat-grid-tile colspan="3" rowspan="2">
+                <mat-progress-spinner [value]="countdown"></mat-progress-spinner>
+            </mat-grid-tile>
+            <mat-grid-tile></mat-grid-tile>
+            <mat-grid-tile></mat-grid-tile>
+            <mat-grid-tile></mat-grid-tile>
+
+            <mat-grid-tile></mat-grid-tile>
+            <mat-grid-tile></mat-grid-tile>
+            <mat-grid-tile>
                 {{round.Question}}
-            </div>
-        </div>
-        <div class="col-md-4"></div>
-    </div>
-    <div class="row">
-        <div class="col-md-4 text-center">
-            <button mat-button (click)="leftChoice()">
-                {{round.LeftVariant}}
-            </button>
-        </div>
-        <div class="col-md-4"></div>
-        <div class="col-md-4 text-center">
-            <button mat-button (click)="rightChoice()">
-                {{round.RightVariant}}
-            </button>
-        </div>
-    </div>
-</div>
+            </mat-grid-tile>
+            <mat-grid-tile></mat-grid-tile>
+            <mat-grid-tile></mat-grid-tile>
+
+            <mat-grid-tile></mat-grid-tile>
+            <mat-grid-tile>
+                <button mat-button (click)="leftChoice()">
+                    {{round.LeftVariant}}
+                </button>
+            </mat-grid-tile>
+            <mat-grid-tile></mat-grid-tile>
+            <mat-grid-tile>
+                <button mat-button (click)="rightChoice()">
+                    {{round.RightVariant}}
+                </button>
+            </mat-grid-tile>
+            <mat-grid-tile></mat-grid-tile>
+
+            <mat-grid-tile></mat-grid-tile>
+            <mat-grid-tile></mat-grid-tile>
+            <mat-grid-tile></mat-grid-tile>
+            <mat-grid-tile></mat-grid-tile>
+            <mat-grid-tile></mat-grid-tile>
+        </mat-grid-list>
+    </mat-card-content>
+</mat-card>

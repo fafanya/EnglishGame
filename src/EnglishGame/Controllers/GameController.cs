@@ -142,7 +142,7 @@ namespace EnglishGame.Controllers
             try
             {
                 msg = CheckAnswers(duel);
-                await m_HubContext.Clients.Group(duel.Id.ToString()).InvokeAsync("MessageReceived",msg);
+                await m_HubContext.Clients.Group(duel.Id.ToString()).SendAsync("MessageReceived", msg);
                 data = duel;
                 m_Context.UDuels.Update(duel);
                 m_Context.SaveChanges();

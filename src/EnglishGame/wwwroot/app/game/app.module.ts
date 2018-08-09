@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
     MatButtonModule, MatGridListModule, MatListModule,
-    MatProgressSpinnerModule, MatInputModule
+    MatProgressSpinnerModule, MatInputModule, MatCardModule
 } from '@angular/material';
 import 'hammerjs';
 
@@ -31,7 +31,7 @@ import { AppRoutingModule } from './app-routing.module';
         AppRoutingModule,
         BrowserAnimationsModule,
         MatButtonModule, MatGridListModule,
-        MatListModule, MatProgressSpinnerModule, MatInputModule
+        MatListModule, MatProgressSpinnerModule, MatInputModule, MatCardModule
     ],
     declarations:
     [

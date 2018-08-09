@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { TransportType, ConsoleLogger, LogLevel, HttpConnection, HubConnection} from "@aspnet/signalr-client";
+import { HubConnection, HubConnectionBuilder } from "@aspnet/signalr";
 import 'rxjs/add/operator/toPromise';
-import { Observable } from "rxjs/Observable";
-import { Subject } from "rxjs/Subject";
+import { Observable, Subject } from "rxjs";
 import { SignalRConnectionStatus } from '../../_common/signalr/interfaces';
 
 @Injectable()
@@ -25,12 +24,20 @@ export class SignalRService {
 
     start(debug: boolean): Observable<SignalRConnectionStatus> {
 
-        var transportType = TransportType.WebSockets;
+        /*var transportType = TransportType.WebSockets;
 
         var logger = new ConsoleLogger(LogLevel.Information);
         var chatHub = new HttpConnection('http://localhost:5000/broadcaster',
             { transport: transportType});
-        this.chatConnection = new HubConnection(chatHub, logger);
+        this.chatConnection = new HubConnection(chatHub, logger);*/
+
+        /*this.chatConnection = new HubConnectionBuilder()
+            .withUrl(window.location.href + 'chathub')
+            .build();*/
+
+        this.chatConnection = new HubConnectionBuilder()
+            .withUrl('http://localhost:5000/broadcaster')
+            .build();
 
         this.chatConnection.on('setConnectionId', (message) => {
             this.onSetConnectionId(message);

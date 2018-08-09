@@ -25,12 +25,17 @@
             '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
             '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
             '@angular/material': 'npm:@angular/material/bundles/material.umd.js',
+            //http
+            '@angular/common/http': 'npm:@angular/common/bundles/common-http.umd.js',
             // CDK individual packages
             '@angular/cdk/a11y': 'npm:@angular/cdk/bundles/cdk-a11y.umd.js',
+            '@angular/cdk/accordion': 'npm:@angular/cdk/bundles/cdk-accordion.umd.js',
             '@angular/cdk/bidi': 'npm:@angular/cdk/bundles/cdk-bidi.umd.js',
             '@angular/cdk/coercion': 'npm:@angular/cdk/bundles/cdk-coercion.umd.js',
             '@angular/cdk/collections': 'npm:@angular/cdk/bundles/cdk-collections.umd.js',
+            '@angular/cdk/http': 'npm:@angular/cdk/bundles/cdk-http.umd.js',
             '@angular/cdk/keycodes': 'npm:@angular/cdk/bundles/cdk-keycodes.umd.js',
+            '@angular/cdk/layout': 'npm:@angular/cdk/bundles/cdk-layout.umd.js',
             '@angular/cdk/observers': 'npm:@angular/cdk/bundles/cdk-observers.umd.js',
             '@angular/cdk/overlay': 'npm:@angular/cdk/bundles/cdk-overlay.umd.js',
             '@angular/cdk/platform': 'npm:@angular/cdk/bundles/cdk-platform.umd.js',
@@ -40,11 +45,13 @@
             '@angular/cdk/table': 'npm:@angular/cdk/bundles/cdk-table.umd.js',
             '@angular/cdk/testing': 'npm:@angular/cdk/bundles/cdk-testing.umd.js',
             '@angular/cdk/stepper': 'npm:@angular/cdk/bundles/cdk-stepper.umd.js',
+            '@angular/cdk/text-field': 'npm:@angular/cdk/bundles/cdk-text-field.umd.js',
+            '@angular/cdk/tree': 'npm:@angular/cdk/bundles/cdk-tree.umd.js',
             '@angular/cdk': 'npm:@angular/cdk/bundles/cdk.umd.js',
             // other libraries
             'rxjs': 'npm:rxjs',
-            '@aspnet/signalr-client': 'npm:@aspnet/signalr-client/dist/browser/signalr-client-1.0.0-alpha2-final.js',
-            //'@aspnet/signalr-client': 'npm:@aspnet/signalr-client/dist/src',
+            'rxjs-compat': 'npm:rxjs-compat',
+            '@aspnet/signalr': 'npm:@aspnet/signalr/dist/browser/signalr.js',
             'hammerjs': 'npm:hammerjs/hammer.js'
         },
         // packages tells the System loader how to load when no filename and/or no extension
@@ -54,13 +61,16 @@
                 defaultExtension: 'js'
             },
             rxjs: {
+                defaultExtension: 'js',
+                main: "index.js"
+            },
+            "rxjs/operators": {
+                defaultExtension: 'js',
+                main: "index.js"
+            },
+            "rxjs-compat": {
                 defaultExtension: 'js'
-            }/*,
-            '@aspnet/signalr-client': {
-                main: './index.js',
-                defaultExtension: 'js'
-            }*/
-
+            }
         }
     });
 })(this);
