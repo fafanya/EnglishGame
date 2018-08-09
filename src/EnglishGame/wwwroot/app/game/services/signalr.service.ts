@@ -24,17 +24,6 @@ export class SignalRService {
 
     start(debug: boolean): Observable<SignalRConnectionStatus> {
 
-        /*var transportType = TransportType.WebSockets;
-
-        var logger = new ConsoleLogger(LogLevel.Information);
-        var chatHub = new HttpConnection('http://localhost:5000/broadcaster',
-            { transport: transportType});
-        this.chatConnection = new HubConnection(chatHub, logger);*/
-
-        /*this.chatConnection = new HubConnectionBuilder()
-            .withUrl(window.location.href + 'chathub')
-            .build();*/
-
         this.chatConnection = new HubConnectionBuilder()
             .withUrl('http://localhost:5000/broadcaster')
             .build();
